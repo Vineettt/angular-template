@@ -1,0 +1,28 @@
+[
+    {
+      "label": "Dashboard",
+      "icon": "dashboard",
+      "route": "/dashboard/main"
+    },
+    {
+      "label": "Users",
+      "icon": "person",
+      "route": "/dashboard/users"
+    },
+    {
+        "label": "Create Ticket",
+        "icon": "people",
+        "route": "/dashboard/create-ticket"
+    },
+    {
+      "label": "Tickets",
+      "icon": "receipt_long",
+      "route": "/dashboard/tickets"
+    },
+    {
+      "label": "Settings",
+      "icon": "settings",
+      "route": "/dashboard/settings"
+    }
+  ]
+  

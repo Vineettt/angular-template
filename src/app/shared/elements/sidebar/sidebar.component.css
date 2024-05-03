@@ -1,0 +1,12 @@
+
+mat-drawer{
+    width: 14rem;
+    background-color: #673ab7;
+}
+.siebarHt{
+    text-align: center;
+    min-height: 100vh;
+}
+mat-list-item{
+    color: white !important;
+}

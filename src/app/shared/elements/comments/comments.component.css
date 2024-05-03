@@ -1,0 +1,16 @@
+.comDate{
+    text-align: right;
+    color: #673ab7;
+}
+.dispFlex{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.name{
+    font-size: 18px;
+}
+.nameText{
+    color: #673ab7;
+}
