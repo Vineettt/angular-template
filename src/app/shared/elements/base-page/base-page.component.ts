@@ -55,7 +55,6 @@ export class BasePageComponent implements OnInit {
   __location !: Location;
 
 
-  
   constructor() {
     this.__formBuilder =  AppInjector.get(FormBuilder);
     this.__apiCallService = AppInjector.get(ApiCallService);

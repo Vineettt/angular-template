@@ -25,18 +25,15 @@ export class LoggedOutGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    // if (this.__appLoadService.user == undefined) {
-    //   this.__appLoadService.loadUser();
-    //   this.__appLoadService.loadToken();
-    // }
-    // if (this.__appLoadService.loggedIn()) {
-    //   this.__router.navigate(['/dashboard/create-ticket']);
-    //   return false;
-    // } else if (state.url === '/auth') {
-    //   this.__router.navigate(['/auth/register']);
-    //   return true;
-    // } else {
+    if (this.__appLoadService.user == undefined) {
+      this.__appLoadService.loadUser();
+      this.__appLoadService.loadToken();
+    }
+    if (this.__appLoadService.loggedIn()) {
+      this.__router.navigate(['/dashboard']);
+      return false;
+    } else {
       return true;
-    // }
+    }
   }
 }

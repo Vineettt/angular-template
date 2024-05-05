@@ -1,0 +1,4 @@
+<mat-form-field [appearance]="__appearance">
+    <mat-label>{{__label}}</mat-label>
+    <input matInput type="{{__type}}" [(ngModel)]="__value" [required]="__required" [disabled]="__disabled" (ngModelChange)="onValueChange($event)">
+</mat-form-field>

@@ -1,6 +1,6 @@
 import { pageConfig } from "src/assets/content/page-config";
 
-export const environment = {
-  production: false,
+export const environment : any = {
+  production: true,
   pageConfig
 };

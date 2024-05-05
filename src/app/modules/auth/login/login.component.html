@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" class="row-height">
+  <mat-card class="login-card">
+    <mat-card-title fxLayoutAlign="center center">
+      Login
+    </mat-card-title>
+    <form>
+      <mat-card-content>
+        <app-input [id]="__emailInput.id" [element]="__emailInput.element" [type]="__emailInput.type" [label]="__emailInput.label"
+          [value]="__emailInput.value" [required]="__emailInput.required"
+          (valueChanged)=" valueChanged($event)"></app-input>
+        <br>
+        <app-input [id]="__passwordInput.id" [element]="__passwordInput.element" [type]="__passwordInput.type" [label]="__passwordInput.label"
+          [value]="__passwordInput.value" [required]="__passwordInput.required"
+          (valueChanged)="valueChanged($event)"></app-input>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="center center">
+        <app-button [id]="__submitButton.id"  [element]="__submitButton.element" [type]="__submitButton.type" [label]="__submitButton.label"
+          [color]="__submitButton.color" (onClick)="buttonOnClick($event)"></app-button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

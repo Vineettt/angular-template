@@ -5,6 +5,7 @@ import { APIRequestPayload, HttpMethod } from './api-call';
 import { AppInjector } from 'src/app/app.module';
 import { StorageService } from '../storage/storage.service';
 import { StorageKey } from 'src/assets/enums/storage-key';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,16 +28,19 @@ export class ApiCallService {
     let method = requestPayload?.method;
     let body = requestPayload?.body;
 
-    const url = `api/${endpoint}`;
+    const url = `${environment.endpoint}/api/${endpoint}`;
     const token = this.__storageService.getItem(StorageKey.TOKEN);
 
-    this.authToken = token;
-
-    const headers = new HttpHeaders({
+    let header: any = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: this.authToken,
-    });
+      'accept-language': 'eu',
+    };
+    if (token) {
+      header['Authorization'] = this.authToken;
+    }
+
+    const headers = new HttpHeaders(header);
 
     switch (method) {
       case HttpMethod.GET:

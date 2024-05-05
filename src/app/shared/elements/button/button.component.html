@@ -1,0 +1,20 @@
+<ng-container [ngSwitch]="__type">
+        <button *ngSwitchDefault mat-button [color]="__color" [disabled]="__disabled"
+                (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
+        <button *ngSwitchCase="'raised'" mat-raised-button [color]="__color" [disabled]="__disabled"
+                (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
+        <button *ngSwitchCase="'stroked'" mat-stroked-button [color]="__color" [disabled]="__disabled"
+                (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
+        <button *ngSwitchCase="'flat'" mat-flat-button [color]="__color" [disabled]="__disabled"
+                (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
+        <button *ngSwitchCase="'icon'" mat-icon-button [color]="__color" [disabled]="__disabled"
+                (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
+        <button *ngSwitchCase="'fab'" mat-fab [color]="__color" [disabled]="__disabled"
+                (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
+        <button *ngSwitchCase="'mini-fab'" mat-mini-fab [color]="__color" [disabled]="__disabled"
+                (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
+</ng-container>
+
+<ng-template #buttonTemplate>
+        <span>{{__label}}</span>
+</ng-template>

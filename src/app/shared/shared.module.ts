@@ -15,18 +15,22 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CommentsComponent } from './elements/comments/comments.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { AlertModalComponent } from './components/alert-modal/alert-modal.component'; 
+import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
+import { BaseElementComponent } from './elements/base-element/base-element.component';
+import { InputComponent } from './elements/input/input.component';
+import { ButtonComponent } from './elements/button/button.component'; 
 
 @NgModule({
   declarations: [
     FooterComponent,
     BasePageComponent,
     SidebarComponent,
-    CommentsComponent,
     AlertModalComponent,
+    BaseElementComponent,
+    InputComponent,
+    ButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -44,7 +48,8 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ],
   exports: [
     CommonModule,
@@ -56,6 +61,7 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     RouterModule,
     FooterComponent,
     BasePageComponent,
+    BaseElementComponent,
     MatTabsModule,
     SidebarComponent,
     MatIconModule,
@@ -64,9 +70,11 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    CommentsComponent,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    InputComponent,
+    ButtonComponent,
+    MatButtonModule 
   ],
 })
 export class SharedModule {}
