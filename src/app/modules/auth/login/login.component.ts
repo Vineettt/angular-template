@@ -78,10 +78,9 @@ export class LoginComponent extends BasePageComponent implements OnInit {
 
     this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
-        console.log(res);
-        // this.__appLoadService.storeUserData(res.user,res.token);
-        // this.__appLoadService.permissions = res?.user?.permission;
-        // this.__router.navigate(['dashboard/main']);
+        this.__appLoadService.storeUserData(res.user,res.token);
+        this.__appLoadService.permissions = res?.user?.permission;
+        this.__router.navigate(['dashboard']);
       },
       error: (err: any) => {
         // console.clear();

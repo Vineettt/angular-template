@@ -1,0 +1,42 @@
+// mat-drawer{
+//     width: 14rem;
+//     background-color: #673ab7;
+// }
+// .siebarHt{
+//     text-align: center;
+//     min-height: 100vh;
+// }
+
+app-sidebar {
+    .mat-drawer-container {
+        position: inherit;
+    }
+
+    mat-nav-list {
+        width: 60px;
+        overflow: hidden;
+        transition: width 0.3s;
+
+        h4 {
+            opacity: 0;
+        }
+    }
+
+    mat-drawer.expand {
+        mat-nav-list {
+            width: 180px;
+
+            h4 {
+                opacity: 1;
+                margin: auto 10px;
+                transition: all 0.1s ease-in 0.2s;
+            }
+        }
+    }
+
+    .side-bar-list {
+        display: inline-flex;
+        justify-content: center;
+        gap: 10px;
+    }
+}

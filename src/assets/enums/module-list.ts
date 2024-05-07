@@ -1,3 +1,4 @@
 export enum ModuleList {
-    AUTH = "auth"
+    AUTH = "auth",
+    DASHBOARD = "dashboard"
 }

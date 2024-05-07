@@ -5,7 +5,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from './elements/footer/footer.component';
 import { BasePageComponent } from './elements/base-page/base-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SidebarComponent } from './elements/sidebar/sidebar.component';
@@ -20,11 +19,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { AlertModalComponent } from './components/alert-modal/alert-modal.component';
 import { BaseElementComponent } from './elements/base-element/base-element.component';
 import { InputComponent } from './elements/input/input.component';
-import { ButtonComponent } from './elements/button/button.component'; 
+import { ButtonComponent } from './elements/button/button.component';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
 
 @NgModule({
   declarations: [
-    FooterComponent,
     BasePageComponent,
     SidebarComponent,
     AlertModalComponent,
@@ -49,7 +48,8 @@ import { ButtonComponent } from './elements/button/button.component';
     MatPaginatorModule,
     MatDialogModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule
   ],
   exports: [
     CommonModule,
@@ -59,7 +59,6 @@ import { ButtonComponent } from './elements/button/button.component';
     ReactiveFormsModule,
     MatButtonModule,
     RouterModule,
-    FooterComponent,
     BasePageComponent,
     BaseElementComponent,
     MatTabsModule,
@@ -74,7 +73,7 @@ import { ButtonComponent } from './elements/button/button.component';
     MatSelectModule,
     InputComponent,
     ButtonComponent,
-    MatButtonModule 
+    MatButtonModule
   ],
 })
 export class SharedModule {}

@@ -20,7 +20,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-base-page',
   templateUrl: './base-page.component.html',
-  styleUrls: ['./base-page.component.css']
+  styleUrls: ['./base-page.component.scss']
 })
 export class BasePageComponent implements OnInit {
 
