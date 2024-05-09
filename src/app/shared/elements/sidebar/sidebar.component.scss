@@ -36,7 +36,23 @@ app-sidebar {
 
     .side-bar-list {
         display: inline-flex;
-        justify-content: center;
+        justify-content: flex-start;
         gap: 10px;
+    }
+    .hide-class{
+        visibility: hidden;
+    }
+    .ml-5{
+        margin-left: 5px;
+    }
+    .bg-color-selected{
+        background-color: #80808078;
+    }
+    .w-5{
+        width: 5rem;
+    }
+    .mat-drawer{
+        position: relative;
+        height: calc(100vh - 5em);
     }
 }

@@ -7,7 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { BasePageComponent } from './elements/base-page/base-page.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { SidebarComponent } from './elements/sidebar/sidebar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -20,12 +19,13 @@ import { AlertModalComponent } from './components/alert-modal/alert-modal.compon
 import { BaseElementComponent } from './elements/base-element/base-element.component';
 import { InputComponent } from './elements/input/input.component';
 import { ButtonComponent } from './elements/button/button.component';
-import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
     BasePageComponent,
-    SidebarComponent,
     AlertModalComponent,
     BaseElementComponent,
     InputComponent,
@@ -49,7 +49,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDialogModule,
     MatSelectModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatInputModule,
+    MatMenuModule
   ],
   exports: [
     CommonModule,
@@ -62,7 +64,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     BasePageComponent,
     BaseElementComponent,
     MatTabsModule,
-    SidebarComponent,
     MatIconModule,
     MatSidenavModule,
     MatListModule,
@@ -73,7 +74,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSelectModule,
     InputComponent,
     ButtonComponent,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatMenuModule
   ],
 })
 export class SharedModule {}

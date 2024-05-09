@@ -81,6 +81,7 @@ export class LoginComponent extends BasePageComponent implements OnInit {
         this.__appLoadService.storeUserData(res.user,res.token);
         this.__appLoadService.permissions = res?.user?.permission;
         this.__router.navigate(['dashboard']);
+        location.reload();
       },
       error: (err: any) => {
         // console.clear();

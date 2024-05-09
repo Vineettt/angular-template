@@ -1,17 +1,36 @@
 <mat-drawer-container>
-	<mat-drawer #drawer mode="side" disableClose="true" opened="open" [ngClass]="{'expand': __toggleDrawer === true}">
+    <mat-drawer #drawer mode="side" disableClose="true" opened="open" [ngClass]="{'expand': __toggleDrawer === true}">
         <mat-list-item type="button" mat-button (click)="toggleDrawer()">
-            <mat-icon>person</mat-icon>
+            <div class="side-bar-list">
+                <mat-icon>home</mat-icon>
+                <div *ngIf="__toggleDrawer === true">
+                    AW
+                </div>
+            </div>
         </mat-list-item>
-	    <mat-nav-list  *ngFor="let item of sidebarItems" >
-            <mat-list-item>
+        <mat-nav-list *ngFor="let item of sidebarItems">
+            <mat-list-item (click)="toggleNavList(item);triggerRouteNavigation(item?.route)" [ngClass]="{'bg-color-selected': __currentUrl === item.route}">
                 <div class="side-bar-list">
                     <mat-icon>{{ item.icon }}</mat-icon>
-                    <div>
+                    <div class="w-5">
                         {{ item.label }}
                     </div>
-                </div>                
-              </mat-list-item>
+                    <mat-icon *ngIf="item?.childItems?.length > 0">
+                        expand_more
+                    </mat-icon>
+                </div>
+            </mat-list-item>
+            <mat-nav-list *ngIf="item?.expand === true && item?.childItems?.length > 0">
+                <mat-list-item *ngFor="let citem of item?.childItems" (click)="triggerRouteNavigation(citem?.route)"
+                    [ngClass]="{'bg-color-selected': __currentUrl === citem.route}">
+                    <div class="side-bar-list ml-5">
+                        <mat-icon>{{ citem.icon }}</mat-icon>
+                        <div>
+                            {{ citem.label }}
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-nav-list>
         </mat-nav-list>
-	</mat-drawer>
+    </mat-drawer>
 </mat-drawer-container>

@@ -21,11 +21,11 @@ export class LoggedOutGuard implements CanActivate {
     this.__router = AppInjector.get(Router);
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
-    if (this.__appLoadService.user == undefined) {
+  canActivate(): boolean {
+    if (
+      this.__appLoadService.user === undefined ||
+      this.__appLoadService.authToken === undefined
+    ) {
       this.__appLoadService.loadUser();
       this.__appLoadService.loadToken();
     }

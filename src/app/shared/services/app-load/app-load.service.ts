@@ -3,15 +3,18 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { StorageKey } from 'src/assets/enums/storage-key';
 import { StorageService } from '../storage/storage.service';
 import { AppInjector } from 'src/app/app.module';
-import { APIRequestPayload, HttpMethod, Endpoint } from '../api-call/api-call';
 import { ApiCallService } from '../api-call/api-call.service';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppLoadService {
-  allowedUrls!: string[];
+
+  private _viewType = new BehaviorSubject<string>('no_sidebar');
+
+  viewType$ = this._viewType.asObservable();
 
   permissions: any;
 
@@ -38,7 +41,7 @@ export class AppLoadService {
     this.permissions = user.permissions;
     this.user = user;
     this.authToken = token;
-
+    this.setviewType('sidebar');
     return { user: user, roles: user.roles, id: user.id };
   }
 
@@ -47,6 +50,7 @@ export class AppLoadService {
     if (users == undefined) {
       return null;
     }
+    this.setviewType('sidebar');
     this.permissions = this.__storageService.getItem(StorageKey.PERMISSIONS);
     this.user = users;
     const roles = users.roles;
@@ -72,5 +76,9 @@ export class AppLoadService {
     this.authToken = null;
     this.user = null;
     this.__storageService.clear();
+  }
+
+  setviewType(v: string) {
+    this._viewType.next(v);
   }
 }

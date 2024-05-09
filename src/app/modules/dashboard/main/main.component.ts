@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BasePageComponent } from 'src/app/shared/elements/base-page/base-page.component';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  styleUrl: './main.component.scss',
 })
-export class MainComponent {
-
+export class MainComponent extends BasePageComponent implements OnInit {
+  constructor() {
+    super();
+  }
+  ngOnInit(): void {
+    super.ngOnInit();
+    this.__apiCallService.viewType = 'sidebar';
+    console.log(this.__apiCallService.viewType)
+  }
 }

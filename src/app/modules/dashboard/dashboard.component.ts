@@ -14,7 +14,6 @@ export class DashboardComponent extends BasePageComponent implements OnInit {
   }
   ngOnInit(): void {
     super.ngOnInit();
-
     this.__storageService.setItem(StorageKey.MODULE, String(ModuleList.DASHBOARD));
     this.__router.navigate([
       `${this.__storageService.getItem(StorageKey.MODULE)}/main`,

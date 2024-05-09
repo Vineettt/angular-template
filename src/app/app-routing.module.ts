@@ -19,6 +19,7 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
   },
+  { path: 'mapping', loadChildren: () => import('./modules/mapping/mapping.module').then(m => m.MappingModule) },
 ];
 
 @NgModule({
