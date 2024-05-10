@@ -1,14 +1,1 @@
-<div *ngIf="__viewType === 'sidebar'">
-    <app-navbar></app-navbar>
-    <div fxLayout="row">
-        <div>
-            <app-sidebar></app-sidebar>
-        </div>
-        <div>
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-</div>
-<div class="row-height" *ngIf="__viewType === 'no_sidebar'">
-    <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

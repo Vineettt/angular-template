@@ -4,6 +4,7 @@ import { MappingComponent } from './mapping.component';
 import { RouteRoleComponent } from './route-role/route-role.component';
 import { RouteComponent } from './route/route.component';
 import { RoleComponent } from './role/role.component';
+import { LoggedInGuard } from 'src/app/shared/guards/logged-in.guard';
 
 const routes: Routes = [
   {
@@ -13,14 +14,26 @@ const routes: Routes = [
       {
         path: 'route-role',
         component: RouteRoleComponent,
+        canActivate: [LoggedInGuard],
+        data: {
+          permissions: ['routes_get'],
+        },
       },
       {
         path: 'route',
         component: RouteComponent,
+        canActivate: [LoggedInGuard],
+        data: {
+          permissions: ['routes_get'],
+        },
       },
       {
         path: 'role',
         component: RoleComponent,
+        canActivate: [LoggedInGuard],
+        data: {
+          permissions: ['routes_get'],
+        },
       },
     ],
   },

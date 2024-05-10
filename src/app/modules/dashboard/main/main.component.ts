@@ -13,6 +13,5 @@ export class MainComponent extends BasePageComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.__apiCallService.viewType = 'sidebar';
-    console.log(this.__apiCallService.viewType)
   }
 }

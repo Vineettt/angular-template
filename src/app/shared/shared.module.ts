@@ -21,6 +21,10 @@ import { InputComponent } from './elements/input/input.component';
 import { ButtonComponent } from './elements/button/button.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule} from '@angular/material/menu';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TableComponent } from './elements/table/table.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -30,6 +34,9 @@ import { MatMenuModule} from '@angular/material/menu';
     BaseElementComponent,
     InputComponent,
     ButtonComponent,
+    SidebarComponent,
+    NavbarComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +58,8 @@ import { MatMenuModule} from '@angular/material/menu';
     MatButtonModule,
     MatToolbarModule,
     MatInputModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSortModule
   ],
   exports: [
     CommonModule,
@@ -76,7 +84,10 @@ import { MatMenuModule} from '@angular/material/menu';
     ButtonComponent,
     MatButtonModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    SidebarComponent,
+    NavbarComponent,
+    TableComponent
   ],
 })
 export class SharedModule {}

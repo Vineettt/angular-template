@@ -37,8 +37,11 @@ export class AppLoadService {
   storeUserData(user: any, token: string) {
     this.__storageService.setItem(StorageKey.TOKEN, token);
     this.__storageService.setItem(StorageKey.USER, JSON.stringify(user));
-    this.__storageService.setItem(StorageKey.PERMISSIONS, user.permission);
+    this.__storageService.setItem(StorageKey.PERMISSIONS, JSON.stringify(user.permissions));
     this.permissions = user.permissions;
+    console.log(this.permissions);
+    console.log( JSON.stringify(user.permissions));
+
     this.user = user;
     this.authToken = token;
     this.setviewType('sidebar');
@@ -51,7 +54,10 @@ export class AppLoadService {
       return null;
     }
     this.setviewType('sidebar');
-    this.permissions = this.__storageService.getItem(StorageKey.PERMISSIONS);
+    let permissions = this.__storageService.getItem(StorageKey.PERMISSIONS);
+    if(permissions){
+      this.permissions = JSON.parse(permissions);
+    }
     this.user = users;
     const roles = users.roles;
     const id = users.id;
