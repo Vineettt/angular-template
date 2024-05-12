@@ -25,6 +25,8 @@ export class BaseElementComponent implements OnInit {
 
   __disabled: boolean = false;
 
+  __icon!: string;
+
   @Input() set element(value: string) {
     if (value) {
       this.__element = value;
@@ -70,6 +72,12 @@ export class BaseElementComponent implements OnInit {
   @Input() set id(value: string) {
     if (value) {
       this.__id = value;
+    }
+  }
+
+  @Input() set icon(value: string) {
+    if (value) {
+      this.__icon = value;
     }
   }
 

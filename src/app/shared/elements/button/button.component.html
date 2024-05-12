@@ -16,5 +16,6 @@
 </ng-container>
 
 <ng-template #buttonTemplate>
-        <span>{{__label}}</span>
+        <mat-icon *ngIf="__icon">{{__icon}}</mat-icon>
+        <span *ngIf="__label">{{__label}}</span>
 </ng-template>

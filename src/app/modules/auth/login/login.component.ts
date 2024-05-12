@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BasePageComponent } from 'src/app/shared/elements/base-page/base-page.component';
+import { AlertDialogPayload } from 'src/app/shared/services/alert-dialog/alert-dialog';
 import {
   APIRequestPayload,
   Endpoint,
@@ -64,8 +65,6 @@ export class LoginComponent extends BasePageComponent implements OnInit {
     ) {
       return;
     }
-    console.log(event);
-
     const user = {
       email: this.__emailInput.value,
       password: this.__passwordInput.value,
@@ -78,12 +77,20 @@ export class LoginComponent extends BasePageComponent implements OnInit {
 
     this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
-        this.__appLoadService.storeUserData(res.user,res.token);
+        this.__appLoadService.storeUserData(res.user, res.token);
         this.__router.navigate(['dashboard']);
       },
-      error: (err: any) => {
-        // console.clear();
-        console.log(err);
+      error: async (err: any) => {
+        let payload = this.formatErrorMessage(err.error);
+        if (payload?.status && payload?.type === 'error') {
+          let alertDialogPayload = new AlertDialogPayload();
+          alertDialogPayload.message = payload?.message;
+          alertDialogPayload.key = payload?.key;
+          alertDialogPayload.title = 'Alert';
+          let rPayload = await this.__alertDialogService
+            .popUp(alertDialogPayload)
+            .toPromise();
+        }
       },
       complete: () => {},
     });

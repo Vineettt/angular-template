@@ -1,6 +1,6 @@
 export const permissionsConfig: any = {
-  routes_get: {
+  routes_post: {
     endpoint: '/routes',
-    method: 'get',
+    method: 'post',
   },
 };

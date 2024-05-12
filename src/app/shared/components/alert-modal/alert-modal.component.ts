@@ -1,32 +1,32 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { BasePageComponent } from '../../elements/base-page/base-page.component';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AlertButtonConfig, AlertModalButtonNameEnum, AlertModalButtonTextEnum, AlertModalButtonTypeEnum } from 'src/assets/enums/alert-modal';
+import { AlertButtonConfig, AlertModalButtonEnum} from 'src/assets/enums/alert-modal';
+import { ButtonType } from 'src/assets/enums/button';
+import { Color } from 'src/assets/enums/color';
 
 @Component({
   selector: 'app-alert-modal',
   templateUrl: './alert-modal.component.html',
-  styleUrls: ['./alert-modal.component.scss']
+  styleUrls: ['./alert-modal.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class AlertModalComponent extends BasePageComponent implements OnInit {
+export class AlertModalComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,  
     private __dialogRef: MatDialogRef<AlertModalComponent>
   ) {
-    super();
   }
 
   ngOnInit(): void {
-    super.ngOnInit();
-
     if(this.data.__buttonConfigs === undefined){
       this.data.componentData.__buttonConfigs = [];
 
       let alertConfig = new AlertButtonConfig();
-      alertConfig.buttonName = AlertModalButtonNameEnum.OK;
-      alertConfig.buttonType = AlertModalButtonTypeEnum.ACCEPT;
-      alertConfig.buttonText = AlertModalButtonTextEnum.OK;
+      alertConfig.buttonName = AlertModalButtonEnum.OK;
+      alertConfig.buttonType = ButtonType.flat,
+      alertConfig.buttonText = AlertModalButtonEnum.OK;
+      alertConfig.buttonColor = Color.primary;
       this.data.componentData.__buttonConfigs.push(alertConfig);
     
     }
@@ -35,10 +35,6 @@ export class AlertModalComponent extends BasePageComponent implements OnInit {
   buttonClicked(optionClicked: string): void {
     this.__dialogRef.close({
       data: {
-        id: this.data.id,
-        parentId: this.data.id,
-        pauseId: this.data.pauseId,
-        resumeId: this.data.resumeId,
         result: optionClicked
       },
     });

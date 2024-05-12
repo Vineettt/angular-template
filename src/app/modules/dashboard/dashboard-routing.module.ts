@@ -14,7 +14,7 @@ const routes: Routes = [
         component: MainComponent,
         canActivate: [LoggedInGuard],
         data: {
-          permissions : ["routes_get"]
+          permissions : ["routes_post"]
         }
       },
     ],

@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { AppInjector } from 'src/app/app.module';
 import { sideBarList } from 'src/assets/data/sidebar';
+import { AppLoadService } from '../../services/app-load/app-load.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -25,23 +26,29 @@ export class SidebarComponent implements OnInit {
 
   __currentUrl!: string;
 
+  __appLoadService!: AppLoadService;
+
   constructor(private elRef: ElementRef) {
     this.__http = AppInjector.get(HttpClient);
     this.__router = AppInjector.get(Router);
-  }
-
-  async ngOnInit() {
-    this.sidebarItems = sideBarList;
-    this.__currentUrl = this.__router.url;
+    this.__appLoadService = AppInjector.get(AppLoadService);
     this.__router.events.subscribe(async (params) => {
       if (this.__currentUrl !== this.__router.url) {
         this.__currentUrl = this.__router.url;
       }
     });
-    this.sidebarItems = await this.updateToggleNavList(
-      this.sidebarItems,
-      this.__currentUrl
-    );
+  }
+
+  async ngOnInit() {
+    this.sidebarItems = sideBarList;
+    this.__currentUrl = this.__router.url;
+    if (this.__appLoadService?.initUpdateSideBar) {
+      this.__appLoadService.initUpdateSideBar = false;
+      this.sidebarItems = await this.updateToggleNavList(
+        this.sidebarItems,
+        this.__currentUrl
+      );
+    }
   }
 
   toggleDrawer() {
@@ -68,6 +75,9 @@ export class SidebarComponent implements OnInit {
       let existFlag = await this.checkChildRouteExist(itr?.childItems, route);
       if (itr.route === route) {
         itr.expand = !itr.expand;
+      }
+      if (itr.route !== route) {
+        itr.expand = false;
       }
       if (existFlag) {
         itr.expand = true;

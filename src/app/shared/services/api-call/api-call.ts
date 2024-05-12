@@ -17,5 +17,8 @@ export class APIRequestPayload{
   }
 
   export enum Endpoint {
-    LOGIN = "login"
+    LOGIN = "login",
+    ROLES = "roles",
+    ROUTES = "routes",
+    ROLE_ROUTE_MAPPINGS = "role_route_mappings"
   }

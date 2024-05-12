@@ -16,6 +16,8 @@ export class AppLoadService {
 
   viewType$ = this._viewType.asObservable();
 
+  initUpdateSideBar: boolean = true;
+
   permissions: any;
 
   user: any;
@@ -39,9 +41,6 @@ export class AppLoadService {
     this.__storageService.setItem(StorageKey.USER, JSON.stringify(user));
     this.__storageService.setItem(StorageKey.PERMISSIONS, JSON.stringify(user.permissions));
     this.permissions = user.permissions;
-    console.log(this.permissions);
-    console.log( JSON.stringify(user.permissions));
-
     this.user = user;
     this.authToken = token;
     this.setviewType('sidebar');

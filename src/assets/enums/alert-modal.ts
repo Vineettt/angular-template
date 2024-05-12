@@ -3,21 +3,11 @@ export class AlertButtonConfig {
   buttonType!: string;
   buttonText!: string;
   buttonStatus!:string;
+  buttonColor !:string;
 }
 
-export enum AlertModalButtonNameEnum {
-  OK = 'ok',
-  CANCEL = 'cancel',
-  YES = 'yes'
-}
-
-export enum AlertModalButtonTextEnum {
-  OK = 'ok',
-  CANCEL = 'cancel',
-  YES = 'yes'
-}
-
-export enum AlertModalButtonTypeEnum {
-  ACCEPT = 'accept',
-  CUSTOM = 'custom',
+export enum AlertModalButtonEnum {
+  OK = 'OK',
+  CANCEL = 'CANCEL',
+  YES = 'YES'
 }

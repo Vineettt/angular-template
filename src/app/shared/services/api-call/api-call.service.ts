@@ -10,10 +10,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ApiCallService {
-  [x: string]: any;
-
-  authToken!: any;
-
   __http: HttpClient;
 
   __storageService: StorageService;
@@ -37,7 +33,7 @@ export class ApiCallService {
       'accept-language': 'eu',
     };
     if (token) {
-      header['Authorization'] = this.authToken;
+      header['Authorization'] = token;
     }
 
     const headers = new HttpHeaders(header);

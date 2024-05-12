@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppInjector } from 'src/app/app.module';
@@ -54,6 +54,7 @@ export class BasePageComponent implements OnInit {
 
   __location !: Location;
 
+  __alertDialogService !: AlertDialogService;
 
   constructor() {
     this.__formBuilder =  AppInjector.get(FormBuilder);
@@ -67,6 +68,7 @@ export class BasePageComponent implements OnInit {
     this.__eventQueueService = AppInjector.get(EventQueueService);
     this.__dialogService = AppInjector.get(DialogService);
     this.__location = AppInjector.get(Location);
+    this.__alertDialogService = AppInjector.get(AlertDialogService);
    }
 
   ngOnInit(): void {
@@ -100,11 +102,28 @@ export class BasePageComponent implements OnInit {
   }
 
   onPause(result: any) {
-    console.log("onPause...",result)
   }
 
   onResume(result: any) {
-    console.log("onResume... base page",result, this.__pageConfig);
   }
 
+  formatErrorMessage(obj: any){
+    let resObject:any = {}, messageKeyArray: any[] = [], messageArray: any[] = [];
+    resObject.status = false;
+    if(obj === undefined){
+      return resObject;
+    }
+    if(obj.errors){
+      resObject.status = true;
+      let tempO = obj.errors;
+      for (const key in tempO) {
+        messageKeyArray.push(key);
+        messageArray.push(tempO[key]);
+      }
+      resObject.key = messageKeyArray.join(",");
+      resObject.message = messageArray.join("<br>");
+      resObject.type = "error"
+    }
+    return resObject;
+  }
 }
