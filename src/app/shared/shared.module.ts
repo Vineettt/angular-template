@@ -25,6 +25,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TableComponent } from './elements/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
+import { TablePageSharedComponent } from './pages/table-page-shared/table-page-shared.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatSortModule } from '@angular/material/sort';
     ButtonComponent,
     SidebarComponent,
     NavbarComponent,
-    TableComponent
+    TableComponent,
+    TablePageSharedComponent
   ],
   imports: [
     CommonModule,

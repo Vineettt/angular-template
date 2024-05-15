@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MappingComponent } from './mapping.component';
-import { RouteRoleComponent } from './route-role/route-role.component';
-import { RouteComponent } from './route/route.component';
-import { RoleComponent } from './role/role.component';
+import { RouteRoleComponent } from './pages/route-role/route-role.component';
+import { RouteComponent } from './pages/route/route.component';
+import { RoleComponent } from './pages/role/role.component';
 import { LoggedInGuard } from 'src/app/shared/guards/logged-in.guard';
 
 const routes: Routes = [

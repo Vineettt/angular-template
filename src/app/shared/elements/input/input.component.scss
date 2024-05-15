@@ -2,5 +2,9 @@ app-input{
     mat-form-field{
         max-width: 100%;
         width: 100%;
+        padding: 0!important;
+    }
+    .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
+        height: 0;
     }
 }

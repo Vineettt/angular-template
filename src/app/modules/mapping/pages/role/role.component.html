@@ -1,0 +1,15 @@
+<div fxLayout="column" class="p-1em">
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <app-button [id]="__addButton.id"  [element]="__addButton.element" [type]="__addButton.type" [icon]="__addButton.icon"
+          [color]="__addButton.color" (onClick)="buttonOnClick($event)"></app-button>
+        
+        <app-input [id]="__searchInput.id" [element]="__searchInput.element" [type]="__searchInput.type"
+            [label]="__searchInput.label" [value]="__searchInput.value" [required]="__searchInput.required"
+            (valueChanged)="valueChanged($event)"></app-input>
+    </div>
+    <div>
+        <app-table [id]="__table.id" [element]="__table.element" [displayedColumns]="__table.displayedColumns" [columnData]="__table.columnData" [dataSource]="__table.dataSource"
+            [dataSourceLength]="__table.length" [pageSizeOptions]="__table.pageSizeOptions" [dataSourceIndex]="__table.pageIndex"
+            [dataSourcePageSize]="__table.pageSize" (pageChange)="triggerPageChange($event)"></app-table>
+    </div>
+</div>

@@ -3,7 +3,7 @@ export enum ButtonType {
   raised = 'raised',
   icon = 'icon',
   fab = 'fab',
-  miniFab = 'miniFab',
+  miniFab = 'mini-fab',
   stroked = 'stroked',
   basic = 'basic',
 }
