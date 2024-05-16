@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { BasePageComponent } from 'src/app/shared/elements/base-page/base-page.component';
+import {
+  BasePageComponent,
+  SnackBarPayload,
+} from 'src/app/shared/elements/base-page/base-page.component';
 import { AlertDialogPayload } from 'src/app/shared/services/alert-dialog/alert-dialog';
 import {
   APIRequestPayload,
@@ -31,6 +34,7 @@ export class LoginComponent extends BasePageComponent implements OnInit {
     type: 'password',
     required: true,
     label: 'Password',
+    icon: 'key',
     value: '',
   };
 
@@ -79,6 +83,9 @@ export class LoginComponent extends BasePageComponent implements OnInit {
       next: (res: any) => {
         this.__appLoadService.storeUserData(res.user, res.token);
         this.__router.navigate(['dashboard']);
+        let snackBarPayload = new SnackBarPayload();
+        snackBarPayload.message = res.message;
+        this.triggerSnackBar(snackBarPayload);
       },
       error: async (err: any) => {
         let payload = this.formatErrorMessage(err.error);
@@ -94,5 +101,12 @@ export class LoginComponent extends BasePageComponent implements OnInit {
       },
       complete: () => {},
     });
+  }
+
+  iconClick(event: any) {
+    if (event.id === 'password') {
+      this.__passwordInput.type = event?.type === 'password' ? 'text' : 'password';
+      this.__passwordInput.icon = event?.icon === 'key' ? 'key_off' : 'key';
+    }
   }
 }

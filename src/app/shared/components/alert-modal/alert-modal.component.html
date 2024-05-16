@@ -1,9 +1,11 @@
-<h2 mat-dialog-title  [innerHtml]="data?.componentData?.title"></h2>
-<mat-dialog-content [innerHtml]="data?.componentData?.message">
-</mat-dialog-content>
-<mat-dialog-actions>
-    <span *ngFor="let item of data?.componentData.__buttonConfigs">
-        <app-button [label]="item?.buttonText" [type]="item?.buttonType" [color]="item?.buttonColor"
-            (onClick)="buttonClicked($event)"></app-button>
-    </span>
-</mat-dialog-actions>
+<div class="alert-container">
+    <h2 mat-dialog-title [innerHtml]="data?.componentData?.title"></h2>
+    <mat-dialog-content [innerHtml]="data?.componentData?.message">
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <span *ngFor="let item of data?.componentData.__buttonConfigs">
+            <app-button [label]="item?.buttonText" [type]="item?.buttonType" [color]="item?.buttonColor"
+                (onClick)="buttonClicked($event)"></app-button>
+        </span>
+    </mat-dialog-actions>
+</div>

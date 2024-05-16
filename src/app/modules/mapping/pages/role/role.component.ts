@@ -6,6 +6,7 @@ import {
 } from 'src/app/shared/services/api-call/api-call';
 import { ButtonType } from 'src/assets/enums/button';
 import { Color } from 'src/assets/enums/color';
+import { AddUpdateRoleComponent } from '../../modal/add-update-role/add-update-role.component';
 
 @Component({
   selector: 'app-role',
@@ -52,6 +53,10 @@ export class RoleComponent extends TablePageSharedComponent implements OnInit {
   }
 
   buttonOnClick(event: any) {
-    console.log(event)
+    this.__dialogService.openDialog(AddUpdateRoleComponent)
+  }
+
+  onResume(result: any): void {
+      console.log(result)
   }
 }

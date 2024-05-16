@@ -11,53 +11,58 @@ import { TITLELIST } from 'src/assets/const/title-list';
 import { PermissionService } from '../../services/permissions/permission.service';
 import { AppLoadService } from '../../services/app-load/app-load.service';
 import { Subscription } from 'rxjs';
-import { AppEvent, AppEventType, EventQueueService } from '../../services/event-queue/event-queue.service';
+import {
+  AppEvent,
+  AppEventType,
+  EventQueueService,
+} from '../../services/event-queue/event-queue.service';
 import { AlertDialogService } from '../../services/alert-dialog/alert-dialog.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { Location } from '@angular/common';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-base-page',
   templateUrl: './base-page.component.html',
-  styleUrls: ['./base-page.component.scss']
+  styleUrls: ['./base-page.component.scss'],
 })
 export class BasePageComponent implements OnInit {
+  __formBuilder!: FormBuilder;
 
-  __formBuilder!:FormBuilder;
-
-  __apiCallService!:ApiCallService;
+  __apiCallService!: ApiCallService;
 
   __router!: Router;
 
-  __pageService!:PageService;
+  __pageService!: PageService;
 
-  __storageService!:StorageService;
+  __storageService!: StorageService;
 
-  __appLoadService!:AppLoadService
+  __appLoadService!: AppLoadService;
 
-  __moduleName!:string;
+  __moduleName!: string;
 
-  __pageConfig!:any;
+  __pageConfig!: any;
 
   __titleService!: Title;
-  
+
   __permissionService: PermissionService;
 
-  __onPauseSubscription!:Subscription;
+  __onPauseSubscription!: Subscription;
 
-  __onResumeSubscription!:Subscription;
+  __onResumeSubscription!: Subscription;
 
-  __eventQueueService !: EventQueueService;
+  __eventQueueService!: EventQueueService;
 
-  __dialogService !: DialogService;
+  __dialogService!: DialogService;
 
-  __location !: Location;
+  __location!: Location;
 
-  __alertDialogService !: AlertDialogService;
+  __alertDialogService!: AlertDialogService;
+
+  __snackBar!: MatSnackBar;
 
   constructor() {
-    this.__formBuilder =  AppInjector.get(FormBuilder);
+    this.__formBuilder = AppInjector.get(FormBuilder);
     this.__apiCallService = AppInjector.get(ApiCallService);
     this.__router = AppInjector.get(Router);
     this.__pageService = AppInjector.get(PageService);
@@ -69,13 +74,14 @@ export class BasePageComponent implements OnInit {
     this.__dialogService = AppInjector.get(DialogService);
     this.__location = AppInjector.get(Location);
     this.__alertDialogService = AppInjector.get(AlertDialogService);
-   }
+    this.__snackBar = AppInjector.get(MatSnackBar);
+  }
 
   ngOnInit(): void {
     this.__moduleName = this.__storageService.getItem(StorageKey.MODULE);
-    if(this.__onPauseSubscription) this.__onPauseSubscription.unsubscribe();
-    if(this.__onResumeSubscription)  this.__onResumeSubscription.unsubscribe();
-    this.__onPauseSubscription =this.__eventQueueService
+    if (this.__onPauseSubscription) this.__onPauseSubscription.unsubscribe();
+    if (this.__onResumeSubscription) this.__onResumeSubscription.unsubscribe();
+    this.__onPauseSubscription = this.__eventQueueService
       .on(AppEventType.onPause)
       .subscribe((event: AppEvent<any>) => this.onPause(event.payload));
 
@@ -84,46 +90,63 @@ export class BasePageComponent implements OnInit {
       .subscribe((event: AppEvent<any>) => this.onResume(event.payload));
   }
 
-  ngOnDestroy(){
-    if(this.__onPauseSubscription)  this.__onPauseSubscription.unsubscribe();
-    if(this.__onResumeSubscription)  this.__onResumeSubscription.unsubscribe();
+  ngOnDestroy() {
+    if (this.__onPauseSubscription) this.__onPauseSubscription.unsubscribe();
+    if (this.__onResumeSubscription) this.__onResumeSubscription.unsubscribe();
   }
 
-  initPageConfig(pageID: string){
-    this.__pageConfig = this.__pageService.pageConfig[this.__moduleName][pageID];
+  initPageConfig(pageID: string) {
+    this.__pageConfig =
+      this.__pageService.pageConfig[this.__moduleName][pageID];
     this.setTitleName();
   }
 
   setTitleName() {
     if (this.__pageConfig) {
-      let title:any = this.__pageConfig?.title;
+      let title: any = this.__pageConfig?.title;
       this.__titleService.setTitle(TITLELIST[title]);
     }
   }
 
-  onPause(result: any) {
-  }
+  onPause(result: any) {}
 
-  onResume(result: any) {
-  }
+  onResume(result: any) {}
 
-  formatErrorMessage(obj: any){
-    let resObject:any = {}, messageKeyArray: any[] = [], messageArray: any[] = [];
+  formatErrorMessage(obj: any) {
+    let resObject: any = {},
+      messageKeyArray: any[] = [],
+      messageArray: any[] = [];
     resObject.status = false;
-    if(obj === undefined){
+    if (obj === undefined) {
       return resObject;
     }
-    if(obj.errors){
+    if (obj.errors) {
       resObject.status = true;
       let tempO = obj.errors;
       for (const key in tempO) {
         messageKeyArray.push(key);
         messageArray.push(tempO[key]);
       }
-      resObject.key = messageKeyArray.join(",");
-      resObject.message = messageArray.join("<br>");
-      resObject.type = "error"
+      resObject.key = messageKeyArray.join(',');
+      resObject.message = messageArray.join('<br>');
+      resObject.type = 'error';
     }
     return resObject;
   }
+
+  triggerSnackBar(snackBar: SnackBarPayload) {
+    let sBar : any = {
+      horizontalPosition: snackBar.hozPosition,
+      verticalPosition: snackBar.verPostion,
+      duration: snackBar.duratiom
+    }
+    this.__snackBar.open(snackBar.message, '', sBar);
+  }
+}
+
+export class SnackBarPayload {
+  message!: string;
+  hozPosition: string = 'center';
+  verPostion: string = 'top';
+  duratiom: number = 3000;
 }

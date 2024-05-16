@@ -1,4 +1,5 @@
 <mat-form-field [appearance]="__appearance">
     <mat-label>{{__label}}</mat-label>
     <input matInput type="{{__type}}" [(ngModel)]="__value" [required]="__required" [disabled]="__disabled" (ngModelChange)="onValueChange($event)">
+    <mat-icon class="cursor" *ngIf="__icon" matSuffix (click)="iconClick($event)">{{__icon}}</mat-icon>
 </mat-form-field>

@@ -9,77 +9,23 @@ import { AppearanceType } from 'src/assets/enums/apperance';
 })
 export class BaseElementComponent implements OnInit {
 
-  __id!:string
+  @Input('id') __id!:string
 
-  __element!:string;
+  @Input('element') __element!:string;
 
-  __value!: String;
+  @Input('value') __value!: String;
 
-  __label!: String;
+  @Input('label') __label!: String;
 
-  __type!: String;
+  @Input('type') __type!: String;
 
-  __appearance: MatFormFieldAppearance = AppearanceType.outline;
+  @Input('appearance') __appearance: MatFormFieldAppearance = AppearanceType.outline;
 
-  __required: boolean = false;
+  @Input('required') __required: boolean = false;
 
-  __disabled: boolean = false;
+  @Input('disabled') __disabled: boolean = false;
 
-  __icon!: string;
-
-  @Input() set element(value: string) {
-    if (value) {
-      this.__element = value;
-    }
-  }
-
-  @Input() set value(value: string | undefined) {
-    if (value) {
-      this.__value = value;
-    }
-  }
-
-  @Input() set label(value: string | undefined) {
-    if (value) {
-      this.__label = value;
-    }
-  }
-
-  @Input() set type(value: string | undefined) {
-    if (value) {
-      this.__type = value;
-    }
-  }
-
-  @Input() set appearance(value: MatFormFieldAppearance | undefined) {
-    if (value) {
-      this.__appearance = value;
-    }
-  }
-
-  @Input() set required(value: boolean) {
-    if (value) {
-      this.__required = value;
-    }
-  }
-
-  @Input() set disabled(value: boolean) {
-    if (value) {
-      this.__disabled = value;
-    }
-  }
-
-  @Input() set id(value: string) {
-    if (value) {
-      this.__id = value;
-    }
-  }
-
-  @Input() set icon(value: string) {
-    if (value) {
-      this.__icon = value;
-    }
-  }
+  @Input('icon') __icon!: string;
 
   constructor() {}
 

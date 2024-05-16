@@ -8,15 +8,10 @@ import { ButtonType } from 'src/assets/enums/button';
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent extends BaseElementComponent implements OnInit {
-  __color!: string;
+  
+  @Input('color') __color!: string;
 
   @Output() onClick = new EventEmitter();
-
-  @Input() set color(value: string | undefined) {
-    if (value) {
-      this.__color = value;
-    }
-  }
 
   constructor() {
     super();

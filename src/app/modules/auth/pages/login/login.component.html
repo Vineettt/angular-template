@@ -4,14 +4,14 @@
       Login
     </mat-card-title>
     <form>
-      <mat-card-content>
+      <mat-card-content fxLayout="column"   fxLayoutGap="5.5px">
         <app-input [id]="__emailInput.id" [element]="__emailInput.element" [type]="__emailInput.type" [label]="__emailInput.label"
           [value]="__emailInput.value" [required]="__emailInput.required"
           (valueChanged)=" valueChanged($event)"></app-input>
         <br>
         <app-input [id]="__passwordInput.id" [element]="__passwordInput.element" [type]="__passwordInput.type" [label]="__passwordInput.label"
-          [value]="__passwordInput.value" [required]="__passwordInput.required"
-          (valueChanged)="valueChanged($event)"></app-input>
+          [value]="__passwordInput.value" [required]="__passwordInput.required" [icon]="__passwordInput.icon"
+          (valueChanged)="valueChanged($event)" (onIconClick)="iconClick($event)"></app-input>
       </mat-card-content>
       <mat-card-actions fxLayoutAlign="center center">
         <app-button [id]="__submitButton.id"  [element]="__submitButton.element" [type]="__submitButton.type" [label]="__submitButton.label"
