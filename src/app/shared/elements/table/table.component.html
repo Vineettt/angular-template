@@ -11,7 +11,7 @@
             <td mat-cell *matCellDef="let element" [attr.data-label]="col">
                 <ng-container>
                     <span *ngIf="!col.editOption">{{element[col.prop]}}</span>
-                    <app-button *ngIf="col.editOption === 'button'" [icon]="col.icon" [type]="col.type" [label]="col.label"></app-button>
+                    <app-button *ngIf="col.editOption === 'button'" [icon]="col.icon" [type]="col.type" [label]="col.label"  (onClick)="buttonOnClick($event, col, element)"></app-button>
                 </ng-container>
             </td>
         </ng-container>

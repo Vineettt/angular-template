@@ -1,5 +1,10 @@
 app-alert-modal{
     .alert-container{
-        width: 40rem;
+        width: 30rem;
+    }
+    .button_align{
+        display: flex;
+        justify-content: center;
+        gap: 10px;
     }
 }

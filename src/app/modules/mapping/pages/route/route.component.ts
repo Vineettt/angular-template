@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TablePageSharedComponent } from 'src/app/shared/pages/table-page-shared/table-page-shared.component';
 import { AlertDialogPayload } from 'src/app/shared/services/alert-dialog/alert-dialog';
 import {
@@ -11,6 +11,7 @@ import {
   selector: 'app-route',
   templateUrl: './route.component.html',
   styleUrl: './route.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class RouteComponent extends TablePageSharedComponent implements OnInit {
 

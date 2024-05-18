@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BaseElementComponent } from '../base-element/base-element.component';
 import { ButtonType } from 'src/assets/enums/button';
+import { BaseElementPayload } from '../base-element/base-element';
 
 @Component({
   selector: 'app-button',
@@ -8,7 +9,6 @@ import { ButtonType } from 'src/assets/enums/button';
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent extends BaseElementComponent implements OnInit {
-  
   @Input('color') __color!: string;
 
   @Output() onClick = new EventEmitter();
@@ -21,6 +21,12 @@ export class ButtonComponent extends BaseElementComponent implements OnInit {
   }
 
   buttonClick(e: Event) {
-    this.onClick.emit({ id: this.__id, label: this.__label, element: this.__element, event: e });
+    let bEPayload = new BaseElementPayload();
+    bEPayload.id = this.__id;
+    bEPayload.label = this.__label;
+    bEPayload.element = this.__element;
+    bEPayload.event = e;
+    bEPayload.icon = this.__icon;
+    this.onClick.emit(bEPayload);
   }
 }

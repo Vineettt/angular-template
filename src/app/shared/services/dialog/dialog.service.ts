@@ -50,6 +50,7 @@ export class DialogService {
   ) {
 
     if (dialogRef) {
+      
       dialogRef.beforeClosed().subscribe((result) => {
         this.__eventQueueService.dispatch(
           new AppEvent(AppEventType.onResume, closeResult)
@@ -78,25 +79,12 @@ export class DialogService {
 
 export class DialogModel {
   id!: string;
-  parentId!: string;
-  pauseId!: string;
-  resumeId!: string;
+  parent_id!: string;
+  pause_id!: string;
+  resume_id!: string;
   payload!: any;
-  metaData!: any;
-
-  constructor(
-    id: string,
-    parentId: string,
-    pauseId: string,
-    resumeId: string,
-    payload?: any,
-    metaData?: any
-  ) {
-    this.id = id;
-    this.parentId = parentId;
-    this.pauseId = pauseId;
-    this.resumeId = resumeId;
-    this.payload = payload;
-    this.metaData = metaData;
-  }
+  parent_data!:any;
+  componentData!: any;
+  action!: string|undefined;
+  buttonConfigs!: any;
 }

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { BaseElementComponent } from '../base-element/base-element.component';
+import { BaseElementPayload } from '../base-element/base-element';
+import { TablePayload } from './table';
 
 @Component({
   selector: 'app-table',
@@ -18,7 +20,7 @@ export class TableComponent extends BaseElementComponent implements OnInit {
   @Input('pageSizeOptions') __pageSizeOptions: any = [25, 50, 100];
 
   @Output() pageChange: EventEmitter<number> = new EventEmitter();
-  @Output() dialogClicked: EventEmitter<number> = new EventEmitter();
+  @Output() buttonClickTableEvent: EventEmitter<any> = new EventEmitter();
 
   constructor() {
     super();
@@ -30,20 +32,18 @@ export class TableComponent extends BaseElementComponent implements OnInit {
     this.pageChange.emit(data);
   }
 
-  updateCompany(data: any) {
-    this.dialogClicked.emit(data);
-  }
-
-  updateCity(data: any) {
-    this.dialogClicked.emit(data);
-  }
-
-
   isTableStructureReady(): boolean{
     let result = false;
     if(this.__displayedColumns && this.__columnData){
       result = this.__displayedColumns.every((columnId: any) => this.__columnData.find((columData: { prop: any; }) => columData.prop === columnId))
     }
     return result;
+  }
+
+  buttonOnClick(event: BaseElementPayload, col: any, elm:any) {
+     let tPayload = new TablePayload();
+     tPayload.column = col;
+     tPayload.element = elm;
+     this.buttonClickTableEvent.emit(tPayload);
   }
 }

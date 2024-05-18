@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { BaseElementComponent } from '../base-element/base-element.component';
+import { BaseElementPayload } from '../base-element/base-element';
 
 @Component({
   selector: 'app-input',
@@ -14,7 +15,6 @@ import { BaseElementComponent } from '../base-element/base-element.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputComponent extends BaseElementComponent implements OnInit {
-
   @Output() valueChanged = new EventEmitter();
 
   @Output() onIconClick = new EventEmitter();
@@ -27,22 +27,22 @@ export class InputComponent extends BaseElementComponent implements OnInit {
   }
 
   onValueChange(newValue: string) {
-    this.valueChanged.emit({
-      id: this.__id,
-      label: this.__label,
-      element: this.__element,
-      value: newValue,
-    });
+    let bEPayload = new BaseElementPayload();
+    bEPayload.id = this.__id;
+    bEPayload.label = this.__label;
+    bEPayload.element = this.__element;
+    bEPayload.value = newValue;
+    this.valueChanged.emit(bEPayload);
   }
 
-  iconClick(event: Event){
-    this.onIconClick.emit({
-      id: this.__id,
-      label: this.__label,
-      element: this.__element,
-      icon: this.__icon,
-      type: this.__type,
-      event: event,
-    });
+  iconClick(event: Event) {
+    let bEPayload = new BaseElementPayload();
+    bEPayload.id = this.__id;
+    bEPayload.label = this.__label;
+    bEPayload.element = this.__element;
+    bEPayload.icon = this.__icon;
+    bEPayload.type = this.__type;
+    bEPayload.event = event;
+    this.onIconClick.emit(bEPayload);
   }
 }

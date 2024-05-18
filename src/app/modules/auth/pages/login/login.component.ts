@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { BaseElementPayload } from 'src/app/shared/elements/base-element/base-element';
 import {
   BasePageComponent,
   SnackBarPayload,
@@ -11,6 +12,7 @@ import {
 } from 'src/app/shared/services/api-call/api-call';
 import { ButtonType } from 'src/assets/enums/button';
 import { Color } from 'src/assets/enums/color';
+import { Page } from 'src/assets/enums/page';
 
 @Component({
   selector: 'app-login',
@@ -51,9 +53,10 @@ export class LoginComponent extends BasePageComponent implements OnInit {
   }
   ngOnInit(): void {
     super.ngOnInit();
+    this.initPageConfig(Page.LOGIN);
   }
 
-  valueChanged(event: any) {
+  valueChanged(event: BaseElementPayload) {
     if (event.id === 'email') {
       this.__emailInput.value = event.value;
     }
@@ -62,7 +65,7 @@ export class LoginComponent extends BasePageComponent implements OnInit {
     }
   }
 
-  buttonOnClick(event: any) {
+  buttonOnClick(event: BaseElementPayload) {
     if (
       this.__emailInput.value.trim().length === 0 ||
       this.__passwordInput.value.trim().length === 0
@@ -88,24 +91,16 @@ export class LoginComponent extends BasePageComponent implements OnInit {
         this.triggerSnackBar(snackBarPayload);
       },
       error: async (err: any) => {
-        let payload = this.formatErrorMessage(err.error);
-        if (payload?.status && payload?.type === 'error') {
-          let alertDialogPayload = new AlertDialogPayload();
-          alertDialogPayload.message = payload?.message;
-          alertDialogPayload.key = payload?.key;
-          alertDialogPayload.title = 'Alert';
-          let rPayload = await this.__alertDialogService
-            .popUp(alertDialogPayload)
-            .toPromise();
-        }
+        await this.initError(err, requestPayloadObject);
       },
       complete: () => {},
     });
   }
 
-  iconClick(event: any) {
+  iconClick(event: BaseElementPayload) {
     if (event.id === 'password') {
-      this.__passwordInput.type = event?.type === 'password' ? 'text' : 'password';
+      this.__passwordInput.type =
+        event?.type === 'password' ? 'text' : 'password';
       this.__passwordInput.icon = event?.icon === 'key' ? 'key_off' : 'key';
     }
   }

@@ -2,15 +2,15 @@ export const Auth = {
     "auth" : {
         "login": {
             title: "LOGIN",
-            pageId: "login"
+            page_id: "login"
         },
         "register": {
             title: "REGISTER",
-            pageId: "register"
+            page_id: "register"
         },
         "phone-login":{
             title: "PHONELOGIN",
-            pageId: "phonelogin"
+            page_id: "phonelogin"
         }
     }
 }

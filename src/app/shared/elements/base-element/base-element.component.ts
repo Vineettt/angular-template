@@ -13,11 +13,11 @@ export class BaseElementComponent implements OnInit {
 
   @Input('element') __element!:string;
 
-  @Input('value') __value!: String;
+  @Input('value') __value!: string;
 
-  @Input('label') __label!: String;
+  @Input('label') __label!: string;
 
-  @Input('type') __type!: String;
+  @Input('type') __type!: string;
 
   @Input('appearance') __appearance: MatFormFieldAppearance = AppearanceType.outline;
 

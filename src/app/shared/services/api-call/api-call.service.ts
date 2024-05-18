@@ -46,7 +46,7 @@ export class ApiCallService {
       case HttpMethod.PUT:
         return this.__http.put(url, body, { headers });
       case HttpMethod.DELETE:
-        return this.__http.delete(url, { headers });
+        return this.__http.delete(url, { headers, body });
       default:
         throw new Error(`Unsupported method: ${method}`);
     }

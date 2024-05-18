@@ -20,6 +20,14 @@ import { AlertDialogService } from '../../services/alert-dialog/alert-dialog.ser
 import { DialogService } from '../../services/dialog/dialog.service';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertDialogPayload } from '../../services/alert-dialog/alert-dialog';
+import {
+  AlertButtonConfig,
+  AlertModalButtonEnum,
+} from 'src/assets/enums/alert-modal';
+import { ButtonType } from 'src/assets/enums/button';
+import { Color } from 'src/assets/enums/color';
+import { APIRequestPayload } from '../../services/api-call/api-call';
 
 @Component({
   selector: 'app-base-page',
@@ -95,9 +103,9 @@ export class BasePageComponent implements OnInit {
     if (this.__onResumeSubscription) this.__onResumeSubscription.unsubscribe();
   }
 
-  initPageConfig(pageID: string) {
+  initPageConfig(page_id: string) {
     this.__pageConfig =
-      this.__pageService.pageConfig[this.__moduleName][pageID];
+      this.__pageService.pageConfig[this.__moduleName][page_id];
     this.setTitleName();
   }
 
@@ -110,7 +118,64 @@ export class BasePageComponent implements OnInit {
 
   onPause(result: any) {}
 
-  onResume(result: any) {}
+  onResume(result: any) {
+    if (this.__pageConfig?.page_id === result?.data?.parent_id) {
+      this.setTitleName();
+    }
+  }
+
+  triggerSnackBar(snackBar: SnackBarPayload) {
+    let sBar: any = {
+      horizontalPosition: snackBar.hozPosition,
+      verticalPosition: snackBar.verPostion,
+      duration: snackBar.durations,
+    };
+    this.__snackBar.open(snackBar.message, '', sBar);
+  }
+
+  async initError(err: any, aPayload: APIRequestPayload) {
+    let response: any = {};
+    response.status = false;
+
+    let payload = this.formatErrorMessage(err.error);
+    let alertDialogPayload = new AlertDialogPayload();
+    alertDialogPayload.message = payload?.message;
+    alertDialogPayload.key = payload?.key;
+    if (payload?.status && payload?.type === 'error') {
+      alertDialogPayload.title = 'Alert';
+      let rPayload = await this.__alertDialogService
+        .popUp(alertDialogPayload)
+        .toPromise();
+    }
+    if (payload?.status && payload?.type === 'warning') {
+      let okConfig = new AlertButtonConfig();
+      okConfig.buttonName = AlertModalButtonEnum.YES;
+      (okConfig.buttonType = ButtonType.flat),
+        (okConfig.buttonText = AlertModalButtonEnum.YES);
+      okConfig.buttonColor = Color.warn;
+      alertDialogPayload.buttonConfigs.push(okConfig);
+
+      let cancelConfig = new AlertButtonConfig();
+      cancelConfig.buttonName = AlertModalButtonEnum.CANCEL;
+      (cancelConfig.buttonType = ButtonType.flat),
+        (cancelConfig.buttonText = AlertModalButtonEnum.CANCEL);
+      cancelConfig.buttonColor = Color.primary;
+      alertDialogPayload.buttonConfigs.push(cancelConfig);
+
+      alertDialogPayload.title = 'Warning';
+      let rPayload = await this.__alertDialogService
+        .popUp(alertDialogPayload)
+        .toPromise();
+      if (rPayload?.data?.action === AlertModalButtonEnum.YES) {
+        let body: any = aPayload.body;
+        body[payload.iKey] = payload.key;
+        aPayload.body = body;
+        response.status = true;
+        response.aPayload = aPayload;
+      }
+    }
+    return response;
+  }
 
   formatErrorMessage(obj: any) {
     let resObject: any = {},
@@ -131,16 +196,21 @@ export class BasePageComponent implements OnInit {
       resObject.message = messageArray.join('<br>');
       resObject.type = 'error';
     }
-    return resObject;
-  }
-
-  triggerSnackBar(snackBar: SnackBarPayload) {
-    let sBar : any = {
-      horizontalPosition: snackBar.hozPosition,
-      verticalPosition: snackBar.verPostion,
-      duration: snackBar.duratiom
+    if (obj.warnings) {
+      let wObject = obj.warnings;
+      let wOArray = Object.keys(wObject);
+      const fIndex = wOArray.findIndex((element) =>
+        element.startsWith('IGNORE_')
+      );
+      resObject.status = true;
+      resObject.message = wObject.message;
+      if (fIndex !== -1) {
+        resObject.key = wObject[wOArray[fIndex]];
+        resObject.iKey = wOArray[fIndex];
+      }
+      resObject.type = 'warning';
     }
-    this.__snackBar.open(snackBar.message, '', sBar);
+    return resObject;
   }
 }
 
@@ -148,5 +218,5 @@ export class SnackBarPayload {
   message!: string;
   hozPosition: string = 'center';
   verPostion: string = 'top';
-  duratiom: number = 3000;
+  durations: number = 5000;
 }

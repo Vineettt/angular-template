@@ -10,6 +10,6 @@
     <div>
         <app-table [id]="__table.id" [element]="__table.element" [displayedColumns]="__table.displayedColumns" [columnData]="__table.columnData" [dataSource]="__table.dataSource"
             [dataSourceLength]="__table.length" [pageSizeOptions]="__table.pageSizeOptions" [dataSourceIndex]="__table.pageIndex"
-            [dataSourcePageSize]="__table.pageSize" (pageChange)="triggerPageChange($event)"></app-table>
+            [dataSourcePageSize]="__table.pageSize" (pageChange)="triggerPageChange($event)" (buttonClickTableEvent)="tableButtonEvent($event)"></app-table>
     </div>
 </div>

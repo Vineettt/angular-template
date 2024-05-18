@@ -10,7 +10,7 @@ const pageconfig = environment.pageConfig;
 
 export class PageService {
 
-  pageConfig: any = pageconfig;
+pageConfig: any = pageconfig;
 
   constructor() { }
 }

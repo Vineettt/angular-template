@@ -19,7 +19,7 @@ export class AlertDialogService {
           message: alertDialogPlayload.message,
           errorKey: alertDialogPlayload.key,
           title: alertDialogPlayload.title,
-          __buttonConfigs: alertDialogPlayload.buttonConfigs,
+          buttonConfigs: alertDialogPlayload.buttonConfigs,
         },
       },
       disableClose: true,

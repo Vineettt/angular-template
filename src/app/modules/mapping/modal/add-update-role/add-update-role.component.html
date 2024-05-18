@@ -1,1 +1,13 @@
-<app-button   (onClick)="buttonClicked($event)"></app-button>
+<div class="alert-container">
+    <div mat-dialog-title [innerHtml]="__title"></div>
+    <mat-dialog-content class="pt-20">
+        <app-input [id]="__roleInput.id" [element]="__roleInput.element" [type]="__roleInput.type" [label]="__roleInput.label"
+          [value]="__roleInput.value" [required]="__roleInput.required"
+          (valueChanged)=" valueChanged($event)"></app-input>    </mat-dialog-content>
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10">
+        <app-button [id]="__okButton.id"  [element]="__okButton.element" [type]="__okButton.type" [label]="__okButton.label"
+        [color]="__okButton.color" (onClick)="buttonOnClick($event)"></app-button>
+        <app-button [id]="__cancelButton.id"  [element]="__cancelButton.element" [type]="__cancelButton.type" [label]="__cancelButton.label"
+        [color]="__cancelButton.color" (onClick)="buttonOnClick($event)"></app-button>
+    </mat-dialog-actions>
+</div>
