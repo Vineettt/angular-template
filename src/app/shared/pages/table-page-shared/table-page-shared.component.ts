@@ -1,5 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { BasePageComponent, SnackBarPayload } from '../../elements/base-page/base-page.component';
+import {
+  BasePageComponent,
+  SnackBarPayload,
+} from '../../elements/base-page/base-page.component';
 import { AlertDialogPayload } from '../../services/alert-dialog/alert-dialog';
 import {
   APIRequestPayload,
@@ -95,18 +98,6 @@ export class TablePageSharedComponent
     }
   }
 
-  addRecord(requestPayloadObject: APIRequestPayload) {
-    this.__apiCallService.callService(requestPayloadObject).subscribe({
-      next: (res: any) => {
-        this.getTableData();
-      },
-      error: async (err: any) => {
-        this.initError(err, requestPayloadObject);
-      },
-      complete: () => {},
-    });
-  }
-
   tableButtonEvent(event: TablePayload) {
     if (event?.column?.icon === 'delete' && event?.column?.prop === 'delete') {
       this.initDeleteRow(event);
@@ -120,7 +111,7 @@ export class TablePageSharedComponent
 
   initEditRow(event: TablePayload) {}
 
-  triggerDeleteRow(requestPayloadObject: APIRequestPayload){
+  triggereRowAction(requestPayloadObject: APIRequestPayload) {
     this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
         let snackBarPayload = new SnackBarPayload();
@@ -130,8 +121,8 @@ export class TablePageSharedComponent
       },
       error: async (err: any) => {
         let rPayload = await this.initError(err, requestPayloadObject);
-        if(rPayload.status){
-          this.triggerDeleteRow(rPayload?.aPayload);
+        if (rPayload.status) {
+          this.triggereRowAction(rPayload?.aPayload);
         }
       },
       complete: () => {},

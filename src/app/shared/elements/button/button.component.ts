@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { BaseElementComponent } from '../base-element/base-element.component';
 import { ButtonType } from 'src/assets/enums/button';
 import { BaseElementPayload } from '../base-element/base-element';
@@ -7,6 +7,7 @@ import { BaseElementPayload } from '../base-element/base-element';
   selector: 'app-button',
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ButtonComponent extends BaseElementComponent implements OnInit {
   @Input('color') __color!: string;

@@ -1,7 +1,10 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BaseElementPayload } from 'src/app/shared/elements/base-element/base-element';
-import { BasePageComponent, SnackBarPayload } from 'src/app/shared/elements/base-page/base-page.component';
+import {
+  BasePageComponent,
+  SnackBarPayload,
+} from 'src/app/shared/elements/base-page/base-page.component';
 import { DialogModel } from 'src/app/shared/services/dialog/dialog.service';
 import { PROMPTS } from 'src/assets/const/prompts';
 import { TITLELIST } from 'src/assets/const/title-list';
@@ -10,22 +13,19 @@ import { Color } from 'src/assets/enums/color';
 import { Page } from 'src/assets/enums/page';
 
 @Component({
-  selector: 'app-add-update-role',
-  templateUrl: './add-update-role.component.html',
-  styleUrl: './add-update-role.component.scss',
+  selector: 'app-update-route',
+  templateUrl: './update-route.component.html',
+  styleUrl: './update-route.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class AddUpdateRoleComponent
-  extends BasePageComponent
-  implements OnInit
-{
-  __roleInput: any = {
-    id: 'role',
-    element: 'input',
-    type: 'text',
+export class UpdateRouteComponent extends BasePageComponent implements OnInit {
+  __handlerSelect: any = {
+    id: 'handler',
+    element: 'select',
     required: true,
-    label: 'Role',
+    label: 'handler',
     value: '',
+    itemList: [],
   };
 
   __okButton: any = {
@@ -47,7 +47,7 @@ export class AddUpdateRoleComponent
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogModel,
-    private __dialogRef: MatDialogRef<AddUpdateRoleComponent>
+    private __dialogRef: MatDialogRef<UpdateRouteComponent>
   ) {
     super();
   }
@@ -56,37 +56,31 @@ export class AddUpdateRoleComponent
     super.ngOnInit();
     this.initPageConfig(this.data?.componentData?.init_page);
     this.__title = TITLELIST[this.__pageConfig.title];
-    if(this.data?.componentData?.row){
+    if (this.data?.componentData?.list) {
+      this.__handlerSelect.itemList = this.data?.componentData?.list;
+    }
+    if (this.data?.componentData?.row) {
       let elm = this.data?.componentData?.row;
-      this.__roleInput.value = elm.role;
-      this.__roleInput.row_id = elm.id;
+      this.__handlerSelect.value = elm.handler;
+      this.__handlerSelect.row_id = elm.id;
     }
   }
 
   buttonOnClick(event: BaseElementPayload): void {
     if (event?.id === 'ok') {
       let snackBarPayload = new SnackBarPayload();
-      snackBarPayload.panelClass = ['red-snackbar']
-      if (this.__roleInput?.value?.length === 0) {
-        snackBarPayload.message = PROMPTS['FIELDS_REQUIRED'];
-        this.triggerSnackBar(snackBarPayload);
-        return;
-      }
-      if(this.data?.componentData?.init_page === Page.ADD_ROLE){      
-        let payload = {
-          role: this.__roleInput.value,
-        };
-        this.closeModel('ok', payload);
-      }
-      if(this.data?.componentData?.init_page === Page.UPDATE_ROLE){
-        if (this.__roleInput?.value === this.data?.componentData?.row?.role) {
+      snackBarPayload.panelClass = ['red-snackbar'];
+      if (this.data?.componentData?.init_page === Page.UPDATE_ROUTE) {
+        if (
+          this.__handlerSelect?.value === this.data?.componentData?.row?.handler
+        ) {
           snackBarPayload.message = PROMPTS['NO_CHANGES'];
           this.triggerSnackBar(snackBarPayload);
           return;
         }
         let payload = [{
-          role: this.__roleInput.value,
-          id:  this.__roleInput.row_id
+          handler: this.__handlerSelect.value,
+          id: this.__handlerSelect.row_id,
         }];
         this.closeModel('ok', payload);
       }
@@ -97,8 +91,8 @@ export class AddUpdateRoleComponent
   }
 
   valueChanged(event: BaseElementPayload) {
-    if (event.id === 'role') {
-      this.__roleInput.value = event.value;
+    if (event.id === 'handler') {
+      this.__handlerSelect.value = event.value;
     }
   }
 

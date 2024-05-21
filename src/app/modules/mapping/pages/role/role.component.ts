@@ -82,7 +82,7 @@ export class RoleComponent extends TablePageSharedComponent implements OnInit {
 
   initDeleteRow(event: TablePayload) {
     let body = {
-      role_ids: [
+      roles: [
         {
           role_id: event?.element?.id,
         },
@@ -92,7 +92,7 @@ export class RoleComponent extends TablePageSharedComponent implements OnInit {
     requestPayloadObject.method = HttpMethod.DELETE;
     requestPayloadObject.endpoint = Endpoint.ROLE;
     requestPayloadObject.body = body;
-    this.triggerDeleteRow(requestPayloadObject);
+    this.triggereRowAction(requestPayloadObject);
   }
 
   initEditRow(event: TablePayload) {
@@ -104,7 +104,6 @@ export class RoleComponent extends TablePageSharedComponent implements OnInit {
   }
 
   onResume(result: any): void {
-    console.log(result);
     super.onResume(result);
     if (this.__pageConfig?.page_id === result?.data?.parent_id) {
       switch (result?.data?.id) {
@@ -114,7 +113,16 @@ export class RoleComponent extends TablePageSharedComponent implements OnInit {
             rPayload.method = HttpMethod.POST;
             rPayload.endpoint = Endpoint.ROLE;
             rPayload.body = result?.data?.payload;
-            this.addRecord(rPayload);
+            this.triggereRowAction(rPayload);
+          }
+          break;
+        case Page.UPDATE_ROLE:
+          if (result?.data?.action === 'ok') {
+            let rPayload = new APIRequestPayload();
+            rPayload.method = HttpMethod.PUT;
+            rPayload.endpoint = Endpoint.ROLE;
+            rPayload.body = {roles : result?.data?.payload};
+            this.triggereRowAction(rPayload);
           }
           break;
         default:

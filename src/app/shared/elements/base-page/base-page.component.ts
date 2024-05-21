@@ -129,6 +129,7 @@ export class BasePageComponent implements OnInit {
       horizontalPosition: snackBar.hozPosition,
       verticalPosition: snackBar.verPostion,
       duration: snackBar.durations,
+      panelClass: snackBar.panelClass,
     };
     this.__snackBar.open(snackBar.message, '', sBar);
   }
@@ -136,18 +137,17 @@ export class BasePageComponent implements OnInit {
   async initError(err: any, aPayload: APIRequestPayload) {
     let response: any = {};
     response.status = false;
-
     let payload = this.formatErrorMessage(err.error);
     let alertDialogPayload = new AlertDialogPayload();
-    alertDialogPayload.message = payload?.message;
-    alertDialogPayload.key = payload?.key;
     if (payload?.status && payload?.type === 'error') {
-      alertDialogPayload.title = 'Alert';
-      let rPayload = await this.__alertDialogService
-        .popUp(alertDialogPayload)
-        .toPromise();
+      let snackBarPayload = new SnackBarPayload();
+      snackBarPayload.panelClass = ['red-snackbar']
+      snackBarPayload.message = payload?.message;
+      this.triggerSnackBar(snackBarPayload);
     }
     if (payload?.status && payload?.type === 'warning') {
+      alertDialogPayload.message = payload?.message;
+      alertDialogPayload.key = payload?.key;
       let okConfig = new AlertButtonConfig();
       okConfig.buttonName = AlertModalButtonEnum.YES;
       (okConfig.buttonType = ButtonType.flat),
@@ -219,4 +219,5 @@ export class SnackBarPayload {
   hozPosition: string = 'center';
   verPostion: string = 'top';
   durations: number = 5000;
+  panelClass : any = ['green-snackbar']
 }
