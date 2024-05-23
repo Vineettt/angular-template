@@ -1,8 +1,8 @@
 <mat-form-field [appearance]="__appearance">
     <mat-label>{{__label}}</mat-label>
-    <mat-select [(ngModel)]="__value" (ngModelChange)="onValueChange($event)" [multiple]="__multiple">
+    <mat-select [(value)]="__value" [(ngModel)]="__value" (ngModelChange)="onValueChange($event)" [multiple]="__multiple">
         @for (item of __itemsList; track item) {
-        <mat-option [value]="item.value">{{item.viewValue}}</mat-option>
+        <mat-option [value]="item[__bindValue]">{{item[__bindLabel]}}</mat-option>
         }
     </mat-select>
 </mat-form-field>

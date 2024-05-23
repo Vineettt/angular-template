@@ -1,0 +1,14 @@
+<div class="alert-container">
+    <div mat-dialog-title [innerHtml]="__title"></div>
+    <mat-dialog-content class="pt-20">
+        <app-list [id]="__routesList.id" [element]="__routesList.element" [multiple]="__routesList.multiple" [item-list]="__routesList.itemList" [label]="__routesList.label" [value]="__routesList.value" [bindValue]="__routesList.bindValue"
+        [bindLabel]="__routesList.bindLabel"  (valueChanged)="valueChanged($event)"></app-list>
+    </mat-dialog-content>
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10">
+        <app-button [id]="__okButton.id" [element]="__okButton.element" [type]="__okButton.type"
+            [label]="__okButton.label" [color]="__okButton.color" (onClick)="buttonOnClick($event)"></app-button>
+        <app-button [id]="__cancelButton.id" [element]="__cancelButton.element" [type]="__cancelButton.type"
+            [label]="__cancelButton.label" [color]="__cancelButton.color"
+            (onClick)="buttonOnClick($event)"></app-button>
+    </mat-dialog-actions>
+</div>

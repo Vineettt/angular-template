@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+// @import './theme.scss';
 
 html,
 body {
@@ -34,4 +36,9 @@ body {
         --mat-mdc-snack-bar-button-color: #fff;
         --mdc-snackbar-supporting-text-color: #fff;
     }
+}
+
+h1{
+    padding: 0;
+    margin: 0!important;
 }

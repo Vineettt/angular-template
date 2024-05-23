@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BaseElementComponent } from '../base-element/base-element.component';
 import { BaseElementPayload } from '../base-element/base-element';
+import { BaseElementComponent } from '../base-element/base-element.component';
 
 @Component({
-  selector: 'app-select',
-  templateUrl: './select.component.html',
-  styleUrl: './select.component.scss',
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrl: './list.component.scss'
 })
-export class SelectComponent extends BaseElementComponent implements OnInit {
+export class ListComponent extends BaseElementComponent implements OnInit {
   @Input('item-list') __itemsList!: any;
 
   @Input('multiple') __multiple: boolean = false;

@@ -53,6 +53,8 @@ export class BasePageComponent implements OnInit {
 
   __titleService!: Title;
 
+  __title!:string;
+
   __permissionService: PermissionService;
 
   __onPauseSubscription!: Subscription;

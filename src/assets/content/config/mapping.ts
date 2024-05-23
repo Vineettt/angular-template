@@ -5,7 +5,7 @@ export const Mapping = {
       page_id: 'role',
     },
     route: {
-      title: 'ROUTE',
+    title: 'ROUTE',
       page_id: 'route',
     },
     route_role: {
@@ -23,6 +23,14 @@ export const Mapping = {
     update_route: {
       title: 'UPDATE_ROUTE',
       page_id: 'update_route',
+    },
+    role_route_mapping: {
+      title: 'ROLE_ROUTE_MAPPING',
+      page_id: 'role_route_mapping',
+    },
+    modify_role_route_mapping: {
+      title: 'MODIFY_ROLE_ROUTE_MAPPING',
+      page_id: 'modify_role_route_mapping',
     },
   },
 };

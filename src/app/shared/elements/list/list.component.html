@@ -1,0 +1,6 @@
+<mat-label>{{__label}}</mat-label>
+<mat-selection-list #items [(ngModel)]="__value" (ngModelChange)="onValueChange($event)" [multiple]="__multiple">
+    @for (item of __itemsList; track item) {
+        <mat-list-option [selected]="__value.includes(item[__bindValue])" [value]="item[__bindValue]">{{item[__bindLabel]}}</mat-list-option>
+    }
+</mat-selection-list>

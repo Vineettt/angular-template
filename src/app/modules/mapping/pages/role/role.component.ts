@@ -11,12 +11,12 @@ import {
   HttpMethod,
 } from 'src/app/shared/services/api-call/api-call';
 import { ButtonType } from 'src/assets/enums/button';
-import { Color } from 'src/assets/enums/color';
 import { AddUpdateRoleComponent } from '../../modal/add-update-role/add-update-role.component';
 import { Page } from 'src/assets/enums/page';
 import { BaseElementPayload } from 'src/app/shared/elements/base-element/base-element';
 import { DialogModel } from 'src/app/shared/services/dialog/dialog.service';
 import { TablePayload } from 'src/app/shared/elements/table/table';
+import { TITLELIST } from 'src/assets/const/title-list';
 
 @Component({
   selector: 'app-role',
@@ -39,6 +39,7 @@ export class RoleComponent extends TablePageSharedComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.initPageConfig(Page.ROLE);
+    this.__title = TITLELIST[this.__pageConfig.title];
     this.__table.displayedColumns = ['role', 'edit', 'delete'];
     this.__table.columnData = [
       { prop: 'role', displayName: 'Role' },

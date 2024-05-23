@@ -6,7 +6,7 @@ export const sideBarList: any = [
     expand: false,
   },
   {
-    label: 'Mapping',
+    label: 'RR Mapping',
     icon: 'join_inner',
     route: '/mapping/route-role',
     expand: false,

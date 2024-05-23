@@ -10,6 +10,7 @@ import { RoleComponent } from './pages/role/role.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddUpdateRoleComponent } from './modal/add-update-role/add-update-role.component';
 import { UpdateRouteComponent } from './modal/update-route/update-route.component';
+import { ModifyRoleRouteMappingComponent } from './modal/modify-role-route-mapping/modify-role-route-mapping.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { UpdateRouteComponent } from './modal/update-route/update-route.componen
     RouteComponent,
     RoleComponent,
     AddUpdateRoleComponent,
-    UpdateRouteComponent
+    UpdateRouteComponent,
+    ModifyRoleRouteMappingComponent
   ],
   imports: [
     CommonModule,

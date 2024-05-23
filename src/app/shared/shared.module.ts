@@ -27,6 +27,7 @@ import { TableComponent } from './elements/table/table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { TablePageSharedComponent } from './pages/table-page-shared/table-page-shared.component';
 import { SelectComponent } from './elements/select/select.component';
+import { ListComponent } from './elements/list/list.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { SelectComponent } from './elements/select/select.component';
     NavbarComponent,
     TableComponent,
     TablePageSharedComponent,
-    SelectComponent
+    SelectComponent,
+    ListComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +65,7 @@ import { SelectComponent } from './elements/select/select.component';
     MatToolbarModule,
     MatInputModule,
     MatMenuModule,
-    MatSortModule
+    MatSortModule,
   ],
   exports: [
     CommonModule,
@@ -92,7 +94,9 @@ import { SelectComponent } from './elements/select/select.component';
     SidebarComponent,
     NavbarComponent,
     TableComponent,
-    SelectComponent
+    SelectComponent,
+    MatListModule,
+    ListComponent
   ],
 })
 export class SharedModule {}

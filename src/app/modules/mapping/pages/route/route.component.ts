@@ -15,6 +15,7 @@ import {
 import { Page } from 'src/assets/enums/page';
 import { UpdateRouteComponent } from '../../modal/update-route/update-route.component';
 import { DialogModel } from 'src/app/shared/services/dialog/dialog.service';
+import { TITLELIST } from 'src/assets/const/title-list';
 
 @Component({
   selector: 'app-route',
@@ -30,6 +31,7 @@ export class RouteComponent extends TablePageSharedComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.initPageConfig(Page.ROUTE);
+    this.__title = TITLELIST[this.__pageConfig.title];
     this.__table.displayedColumns = ['endpoint', 'method', 'handler', 'edit'];
     this.__table.columnData = [
       { prop: 'endpoint', displayName: 'Endpoint' },
@@ -52,10 +54,15 @@ export class RouteComponent extends TablePageSharedComponent implements OnInit {
     let requestPayloadObject = new APIRequestPayload();
     requestPayloadObject.method = HttpMethod.GET;
     requestPayloadObject.endpoint = Endpoint.HANDLER;
-    let response = await this.__apiCallService
+    let list = [];
+    try {
+      let response = await this.__apiCallService
       .callService(requestPayloadObject)
       .toPromise();
-    let list = response?.payload || [];
+      list = response?.payload || [];
+    } catch (error) {
+      list =  [];
+    }
     let cData: any = {
       init_page: Page.UPDATE_ROUTE,
       row: event.element,

@@ -4,5 +4,7 @@ export enum Page {
   UPDATE_ROLE = "update_role",
   UPDATE_ROUTE = "update_route",
   ROLE = "role",
-  ROUTE = "route"
+  ROUTE = "route",
+  ROLE_ROUTE_MAPPING = "role_route_mapping",
+  MODIFY_ROLE_ROUTE_MAPPING = "modify_role_route_mapping"
 }

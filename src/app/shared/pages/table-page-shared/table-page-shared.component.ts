@@ -48,7 +48,7 @@ export class TablePageSharedComponent
 
   __typingTimer!: any;
 
-  constructor(private __cDRefs: ChangeDetectorRef) {
+  constructor(public __cDRefs: ChangeDetectorRef) {
     super();
   }
 
