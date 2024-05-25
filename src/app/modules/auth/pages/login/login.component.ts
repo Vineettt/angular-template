@@ -82,7 +82,7 @@ export class LoginComponent extends BasePageComponent implements OnInit {
     requestPayloadObject.endpoint = Endpoint.LOGIN;
     requestPayloadObject.body = user;
 
-    this.__apiCallService.callService(requestPayloadObject).subscribe({
+    let subscr = this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
         this.__appLoadService.storeUserData(res.user, res.token);
         this.__router.navigate(['dashboard']);
@@ -95,6 +95,7 @@ export class LoginComponent extends BasePageComponent implements OnInit {
       },
       complete: () => {},
     });
+    this.__subscriptions.push(subscr);
   }
 
   iconClick(event: BaseElementPayload) {

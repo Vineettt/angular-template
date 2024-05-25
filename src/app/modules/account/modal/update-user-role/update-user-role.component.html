@@ -1,8 +1,8 @@
 <div>
     <div mat-dialog-title [innerHtml]="__title"></div>
     <mat-dialog-content class="pt-20">
-        <app-list [id]="__routesList.id" [element]="__routesList.element" [multiple]="__routesList.multiple" [item-list]="__routesList.itemList" [label]="__routesList.label" [value]="__routesList.value" [bindValue]="__routesList.bindValue"
-        [bindLabel]="__routesList.bindLabel"  (valueChanged)="valueChanged($event)"></app-list>
+        <app-select [id]="__roleSelect.id" [element]="__roleSelect.element" [item-list]="__roleSelect.itemList" [label]="__roleSelect.label" [value]="__roleSelect.value"  [bindValue]="__roleSelect.bindValue"
+        [bindLabel]="__roleSelect.bindLabel"  [multiple]="__roleSelect.multiple" (valueChanged)="valueChanged($event)"></app-select>
     </mat-dialog-content>
     <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10">
         <app-button [id]="__okButton.id" [element]="__okButton.element" [type]="__okButton.type"

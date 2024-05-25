@@ -1,0 +1,29 @@
+<div class="container">
+    <div mat-dialog-title [innerHtml]="__title"></div>
+    <mat-dialog-content class="pt-20">
+        <app-input [id]="__firstNameInput.id" [element]="__firstNameInput.element" [type]="__firstNameInput.type"
+            [disabled]="__firstNameInput.disabled" [label]="__firstNameInput.label" [value]="__firstNameInput.value"
+            [required]="__firstNameInput.required" (valueChanged)=" valueChanged($event)"></app-input>
+        <app-input [id]="__lastNameInput.id" [element]="__lastNameInput.element" [type]="__lastNameInput.type"
+            [disabled]="__lastNameInput.disabled" [label]="__lastNameInput.label" [value]="__lastNameInput.value"
+            [required]="__lastNameInput.required" [icon]="__lastNameInput.icon" (valueChanged)="valueChanged($event)"
+            (onIconClick)="iconClick($event)"></app-input>
+        <app-input [id]="__emailInput.id" [element]="__emailInput.element" [type]="__emailInput.type"
+            [disabled]="__emailInput.disabled" [label]="__emailInput.label" [value]="__emailInput.value"
+            [required]="__emailInput.required" (valueChanged)=" valueChanged($event)"></app-input>
+        <app-input *ngIf="__editMode" [id]="__passwordInput.id" [element]="__passwordInput.element" [type]="__passwordInput.type"
+            [type]="__passwordInput.type" [label]="__passwordInput.label" [value]="__passwordInput.value"
+            [required]="__passwordInput.required" [icon]="__passwordInput.icon" (valueChanged)="valueChanged($event)"
+            (onIconClick)="iconClick($event)"></app-input>
+        <app-select *ngIf="__addMode" [id]="__statusSelect.id" [element]="__statusSelect.element"
+            [item-list]="__statusSelect.itemList" [type]="__statusSelect.type" [label]="__statusSelect.label"
+            [value]="__statusSelect.value" (valueChanged)="valueChanged($event)"></app-select>
+    </mat-dialog-content>
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10">
+        <app-button [id]="__okButton.id" [element]="__okButton.element" [type]="__okButton.type" [disabled]="__okButton.disabled"
+            [label]="__okButton.label" [color]="__okButton.color" (onClick)="buttonOnClick($event)"></app-button>
+        <app-button [id]="__cancelButton.id" [element]="__cancelButton.element" [type]="__cancelButton.type"
+            [label]="__cancelButton.label" [color]="__cancelButton.color"
+            (onClick)="buttonOnClick($event)"></app-button>
+    </mat-dialog-actions>
+</div>

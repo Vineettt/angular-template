@@ -1,10 +1,8 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { UpdateRouteComponent } from 'src/app/modules/mapping/modal/update-route/update-route.component';
 import { BaseElementPayload } from 'src/app/shared/elements/base-element/base-element';
-import {
-  BasePageComponent,
-  SnackBarPayload,
-} from 'src/app/shared/elements/base-page/base-page.component';
+import { BasePageComponent, SnackBarPayload } from 'src/app/shared/elements/base-page/base-page.component';
 import { DialogModel } from 'src/app/shared/services/dialog/dialog.service';
 import { PROMPTS } from 'src/assets/const/prompts';
 import { TITLELIST } from 'src/assets/const/title-list';
@@ -13,19 +11,22 @@ import { Color } from 'src/assets/enums/color';
 import { Page } from 'src/assets/enums/page';
 
 @Component({
-  selector: 'app-update-route',
-  templateUrl: './update-route.component.html',
-  styleUrl: './update-route.component.scss',
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-update-user-role',
+  templateUrl: './update-user-role.component.html',
+  styleUrl: './update-user-role.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
-export class UpdateRouteComponent extends BasePageComponent implements OnInit {
-  __handlerSelect: any = {
-    id: 'handler',
+export class UpdateUserRoleComponent  extends BasePageComponent implements OnInit {
+  __roleSelect: any = {
+    id: 'role',
     element: 'select',
     required: true,
-    label: 'Handler',
+    label: 'Role',
     value: '',
     itemList: [],
+    bindValue: 'id',
+    bindLabel: 'role',
+    multiple: true
   };
 
   __okButton: any = {
@@ -57,12 +58,14 @@ export class UpdateRouteComponent extends BasePageComponent implements OnInit {
     this.initPageConfig(this.data?.componentData?.init_page);
     this.__title = TITLELIST[this.__pageConfig.title];
     if (this.data?.componentData?.list) {
-      this.__handlerSelect.itemList = this.data?.componentData?.list;
+      this.__roleSelect.itemList = this.data?.componentData?.list;
     }
     if (this.data?.componentData?.row) {
       let elm = this.data?.componentData?.row;
-      this.__handlerSelect.value = elm.handler;
-      this.__handlerSelect.row_id = elm.id;
+      let roleArray = elm.roles.split(",");
+      const filteredData = this.__roleSelect.itemList?.filter((obj: { role: any; }) => roleArray.includes(obj.role));
+      this.__roleSelect.value = filteredData.map((obj: any) => obj.id);
+      this.__roleSelect.row_id = elm.id;
     }
   }
 
@@ -72,15 +75,15 @@ export class UpdateRouteComponent extends BasePageComponent implements OnInit {
       snackBarPayload.panelClass = ['red-snackbar'];
       if (this.data?.componentData?.init_page === Page.UPDATE_ROUTE) {
         if (
-          this.__handlerSelect?.value === this.data?.componentData?.row?.handler
+          this.__roleSelect?.value === this.data?.componentData?.row?.handler
         ) {
           snackBarPayload.message = PROMPTS['NO_CHANGES'];
           this.triggerSnackBar(snackBarPayload);
           return;
         }
         let payload = [{
-          handler: this.__handlerSelect.value,
-          id: this.__handlerSelect.row_id,
+          handler: this.__roleSelect.value,
+          id: this.__roleSelect.row_id,
         }];
         this.closeModel('ok', payload);
       }
@@ -91,8 +94,8 @@ export class UpdateRouteComponent extends BasePageComponent implements OnInit {
   }
 
   valueChanged(event: BaseElementPayload) {
-    if (event.id === 'handler') {
-      this.__handlerSelect.value = event.value;
+    if (event.id === 'role') {
+      this.__roleSelect.value = event.value;
     }
   }
 

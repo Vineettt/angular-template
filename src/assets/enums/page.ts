@@ -9,5 +9,10 @@ export enum Page {
   MODIFY_ROLE_ROUTE_MAPPING = "modify_role_route_mapping",
   NOT_FOUND = "not_found",
   PERMISSION_DENIED = "permission_denied",
-  MAINTENANCE = "maintenance"
+  MAINTENANCE = "maintenance",
+  USERS = "users",
+  ADD_USER = "add_user",
+  UPDATE_USER = "update_user",
+  USER_ROLE = "user_role",
+  UPDATE_USER_ROLE = "user_user_role",
 }

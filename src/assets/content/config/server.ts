@@ -1,5 +1,5 @@
-export const SERVER = {
-  mapping: {
+export const Server = {
+  server: {
     not_found: {
       title: 'NOT_FOUND',
       page_id: 'not_found',

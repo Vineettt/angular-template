@@ -111,7 +111,7 @@ export class RouteRoleComponent
     requestPayloadObject.endpoint = this.__endpoint;
     requestPayloadObject.body = body;
 
-    this.__apiCallService.callService(requestPayloadObject).subscribe({
+    let subscr = this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
         this.__table.dataSource = res?.payload;
         this.__table.length = res?.length;
@@ -122,6 +122,7 @@ export class RouteRoleComponent
       },
       complete: () => {},
     });
+    this.__subscriptions.push(subscr);
   }
 
   valueChanged(event: BaseElementPayload) {

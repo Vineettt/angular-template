@@ -15,6 +15,7 @@ import { ApiCallService } from './shared/services/api-call/api-call.service';
 import { StorageService } from './shared/services/storage/storage.service';
 import { Router } from '@angular/router';
 import StatusCode from 'status-code-enum';
+import { Subscriber, Subscription } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
   __storageService!: StorageService;
 
   __router!: Router;
+  
+  __subscriptions: Subscription[] = [];
 
   constructor() {
     this.__appLoadService = AppInjector.get(AppLoadService);
@@ -44,11 +47,17 @@ export class AppComponent implements OnInit {
     this.getUserDetails();
   }
 
+  ngOnDestroy() {
+    this.__subscriptions.map((item: Subscription) => {
+      if (item) item.unsubscribe();
+    });
+  }
+
   getUserDetails() {
     let requestPayloadObject = new APIRequestPayload();
     requestPayloadObject.method = HttpMethod.GET;
     requestPayloadObject.endpoint = Endpoint.USER;
-    this.__apiCallService.callService(requestPayloadObject).subscribe({
+    let subscr = this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
         this.__appLoadService.storeUserData(res.user);
       },
@@ -65,5 +74,6 @@ export class AppComponent implements OnInit {
       },
       complete: () => {},
     });
+    this.__subscriptions.push(subscr);
   }
 }

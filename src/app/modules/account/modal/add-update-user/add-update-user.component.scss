@@ -1,0 +1,10 @@
+app-add-update-user{
+    .container{
+        max-width: 30rem;
+    }
+    app-select {
+        mat-form-field{
+            width: 100%;
+        }
+    }
+}

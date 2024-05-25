@@ -74,7 +74,7 @@ export class TablePageSharedComponent
     requestPayloadObject.endpoint = this.__endpoint;
     requestPayloadObject.body = body;
 
-    this.__apiCallService.callService(requestPayloadObject).subscribe({
+    let subscr = this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
         this.__table.dataSource = res?.payload;
         this.__table.length = res?.length;
@@ -85,6 +85,7 @@ export class TablePageSharedComponent
       },
       complete: () => {},
     });
+    this.__subscriptions.push(subscr);
   }
 
   valueChanged(event: BaseElementPayload) {
@@ -112,7 +113,7 @@ export class TablePageSharedComponent
   initEditRow(event: TablePayload) {}
 
   triggereRowAction(requestPayloadObject: APIRequestPayload) {
-    this.__apiCallService.callService(requestPayloadObject).subscribe({
+    let subscr = this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
         let snackBarPayload = new SnackBarPayload();
         snackBarPayload.message = res.message;
@@ -127,5 +128,6 @@ export class TablePageSharedComponent
       },
       complete: () => {},
     });
+    this.__subscriptions.push(subscr);
   }
 }

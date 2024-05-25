@@ -25,5 +25,8 @@ export class APIRequestPayload{
     ROLE_ROUTE_MAPPINGS = "role-route-mappings",
     ROLE_ROUTE_MAPPING = "role-route-mapping",
     HANDLER = "handler",
-    USER = "user"
+    USER = "user",
+    USERS = "users",
+    USER_STATUS = "user-status",
+    USER_ROLE_MAPPING = "user-role-mapping"
   }

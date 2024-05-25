@@ -71,6 +71,9 @@ export class BasePageComponent implements OnInit {
 
   __snackBar!: MatSnackBar;
 
+ __subscriptions: Subscription[] = [];
+
+
   constructor() {
     this.__formBuilder = AppInjector.get(FormBuilder);
     this.__apiCallService = AppInjector.get(ApiCallService);
@@ -103,6 +106,9 @@ export class BasePageComponent implements OnInit {
   ngOnDestroy() {
     if (this.__onPauseSubscription) this.__onPauseSubscription.unsubscribe();
     if (this.__onResumeSubscription) this.__onResumeSubscription.unsubscribe();
+    this.__subscriptions.map((item: Subscription) => {
+      if (item) item.unsubscribe();
+    });
   }
 
   initPageConfig(page_id: string) {
@@ -144,7 +150,7 @@ export class BasePageComponent implements OnInit {
     if (payload?.status && payload?.type === 'error') {
       let snackBarPayload = new SnackBarPayload();
       snackBarPayload.panelClass = ['red-snackbar']
-      snackBarPayload.message = payload?.message;
+      snackBarPayload.message = payload?.message?.split("<br>").join(",");
       this.triggerSnackBar(snackBarPayload);
     }
     if (payload?.status && payload?.type === 'warning') {

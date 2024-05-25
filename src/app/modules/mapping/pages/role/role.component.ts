@@ -25,6 +25,7 @@ import { TITLELIST } from 'src/assets/const/title-list';
   encapsulation: ViewEncapsulation.None,
 })
 export class RoleComponent extends TablePageSharedComponent implements OnInit {
+  
   __addButton: any = {
     id: 'add',
     element: 'button',

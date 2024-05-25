@@ -38,7 +38,6 @@ export class SidebarComponent implements OnInit {
     this.__permissionService = AppInjector.get(PermissionService);
     this.__router.events.subscribe(async (params) => {
       if (this.__currentUrl !== this.__router.url) {
-        console.log(this.__toggleDrawer)
         this.__currentUrl = this.__router.url;
       }
     });
