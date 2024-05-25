@@ -13,6 +13,8 @@
                 (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
         <button *ngSwitchCase="'mini-fab'" mat-mini-fab [color]="__color" [disabled]="__disabled"
                 (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
+        <button *ngSwitchCase="'item'" mat-menu-item [disabled]="__disabled"
+                (click)="buttonClick($event)"><ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template></button>
 </ng-container>
 
 <ng-template #buttonTemplate>

@@ -15,8 +15,8 @@ export class MappingComponent extends BasePageComponent implements OnInit {
   ngOnInit(): void {
     super.ngOnInit();
     this.__storageService.setItem(StorageKey.MODULE, String(ModuleList.MAPPING));
-    // this.__router.navigate([
-    //   `${this.__storageService.getItem(StorageKey.MODULE)}/route-role`,
-    // ]);
+    this.__router.navigate([
+      `${this.__storageService.getItem(StorageKey.MODULE)}/route-role`,
+    ]);
   }
 }

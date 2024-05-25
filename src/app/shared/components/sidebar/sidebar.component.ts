@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { AppInjector } from 'src/app/app.module';
 import { sideBarList } from 'src/assets/data/sidebar';
 import { AppLoadService } from '../../services/app-load/app-load.service';
+import { PermissionService } from '../../services/permissions/permission.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -28,12 +29,16 @@ export class SidebarComponent implements OnInit {
 
   __appLoadService!: AppLoadService;
 
+  __permissionService!:PermissionService;
+
   constructor(private elRef: ElementRef) {
     this.__http = AppInjector.get(HttpClient);
     this.__router = AppInjector.get(Router);
     this.__appLoadService = AppInjector.get(AppLoadService);
+    this.__permissionService = AppInjector.get(PermissionService);
     this.__router.events.subscribe(async (params) => {
       if (this.__currentUrl !== this.__router.url) {
+        console.log(this.__toggleDrawer)
         this.__currentUrl = this.__router.url;
       }
     });

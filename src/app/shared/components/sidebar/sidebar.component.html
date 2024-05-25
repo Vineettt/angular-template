@@ -8,9 +8,11 @@
                 </div>
             </div>
         </mat-list-item>
-        <mat-nav-list *ngFor="let item of sidebarItems">
-            <mat-list-item (click)="toggleNavList(item);triggerRouteNavigation(item?.route)" [ngClass]="{'bg-color-selected': __currentUrl === item.route}">
-                <div class="side-bar-list">
+        @for (item of sidebarItems; track item) {
+        <mat-nav-list *ngIf="__permissionService.getPermission(item?.permissionsArray)">
+            <mat-list-item (click)="triggerRouteNavigation(item?.route)"
+                [ngClass]="{'bg-color-selected': __currentUrl === item.route}">
+                <div class="side-bar-list" (click)="toggleNavList(item)">
                     <mat-icon>{{ item.icon }}</mat-icon>
                     <div class="w-5">
                         {{ item.label }}
@@ -20,8 +22,10 @@
                     </mat-icon>
                 </div>
             </mat-list-item>
-            <mat-nav-list *ngIf="item?.expand === true && item?.childItems?.length > 0">
-                <mat-list-item *ngFor="let citem of item?.childItems" (click)="triggerRouteNavigation(citem?.route)"
+            <mat-nav-list
+                *ngIf="item?.expand === true && __permissionService.getPermission(item?.permissionsArray) && item?.childItems?.length > 0">
+                @for (citem of item?.childItems; track citem) {
+                <mat-list-item (click)="triggerRouteNavigation(citem?.route)"
                     [ngClass]="{'bg-color-selected': __currentUrl === citem.route}">
                     <div class="side-bar-list ml-5">
                         <mat-icon>{{ citem.icon }}</mat-icon>
@@ -30,7 +34,9 @@
                         </div>
                     </div>
                 </mat-list-item>
+                }
             </mat-nav-list>
         </mat-nav-list>
+        }
     </mat-drawer>
 </mat-drawer-container>

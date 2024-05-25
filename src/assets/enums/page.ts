@@ -6,5 +6,8 @@ export enum Page {
   ROLE = "role",
   ROUTE = "route",
   ROLE_ROUTE_MAPPING = "role_route_mapping",
-  MODIFY_ROLE_ROUTE_MAPPING = "modify_role_route_mapping"
+  MODIFY_ROLE_ROUTE_MAPPING = "modify_role_route_mapping",
+  NOT_FOUND = "not_found",
+  PERMISSION_DENIED = "permission_denied",
+  MAINTENANCE = "maintenance"
 }

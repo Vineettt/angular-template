@@ -83,7 +83,6 @@ export class ModifyRoleRouteMappingComponent extends BasePageComponent implement
           tempObj.route_id = itr,
           payload.push(tempObj)
         }
-        console.log(payload)
         this.closeModel('ok', payload);
       }
     }

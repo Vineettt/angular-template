@@ -113,7 +113,7 @@ export class RoleComponent extends TablePageSharedComponent implements OnInit {
             let rPayload = new APIRequestPayload();
             rPayload.method = HttpMethod.POST;
             rPayload.endpoint = Endpoint.ROLE;
-            rPayload.body = result?.data?.payload;
+            rPayload.body = { roles : result?.data?.payload}
             this.triggereRowAction(rPayload);
           }
           break;

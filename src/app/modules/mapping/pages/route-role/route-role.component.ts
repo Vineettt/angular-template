@@ -161,7 +161,6 @@ export class RouteRoleComponent
         el['endpoint_method'] = `${el.endpoint} [${el.method}]`;
         return el;
       });
-      console.log(list);
       let cData: any = {
         init_page: Page.MODIFY_ROLE_ROUTE_MAPPING,
         list,

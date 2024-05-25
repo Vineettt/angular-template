@@ -73,9 +73,9 @@ export class AddUpdateRoleComponent
         return;
       }
       if(this.data?.componentData?.init_page === Page.ADD_ROLE){      
-        let payload = {
+        let payload = [{
           role: this.__roleInput.value,
-        };
+        }];
         this.closeModel('ok', payload);
       }
       if(this.data?.componentData?.init_page === Page.UPDATE_ROLE){

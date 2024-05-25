@@ -37,15 +37,6 @@ export class LoggedInGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (
-      !this.__appLoadService.loggedIn() &&
-      (this.__appLoadService.user == undefined ||
-        this.__appLoadService.authToken === undefined)
-    ) {
-      this.__appLoadService.loadUser();
-      this.__appLoadService.loadToken();
-    }
-
     if (!this.__appLoadService.loggedIn()) {
       this.__router.navigate(['/auth']);
       return false;
@@ -60,6 +51,9 @@ export class LoggedInGuard {
 
     for (let i = 0; i < expectedPermissionArray?.length; i++) {
       let pAObject = permissionsConfig[expectedPermissionArray[i]];
+      if(pAObject === undefined){
+        continue;
+      }
       let findIndex = permissionsArray.findIndex((el: any) => {
         return  el.method === pAObject.method && el.endpoint === pAObject.endpoint
       });
@@ -72,6 +66,7 @@ export class LoggedInGuard {
     if(expectedRole){
       return true;
     }else{
+      this.__router.navigate(['server/permission-denied']);
       return false;
     }
   }

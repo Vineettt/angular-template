@@ -22,13 +22,6 @@ export class LoggedOutGuard implements CanActivate {
   }
 
   canActivate(): boolean {
-    if (
-      this.__appLoadService.user === undefined ||
-      this.__appLoadService.authToken === undefined
-    ) {
-      this.__appLoadService.loadUser();
-      this.__appLoadService.loadToken();
-    }
     if (this.__appLoadService.loggedIn()) {
       this.__router.navigate(['/dashboard']);
       return false;

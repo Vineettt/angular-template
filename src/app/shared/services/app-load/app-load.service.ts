@@ -6,6 +6,7 @@ import { AppInjector } from 'src/app/app.module';
 import { ApiCallService } from '../api-call/api-call.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { APIRequestPayload, HttpMethod, Endpoint } from '../api-call/api-call';
 
 @Injectable({
   providedIn: 'root',
@@ -36,13 +37,15 @@ export class AppLoadService {
     this.__router = AppInjector.get(Router);
   }
 
-  storeUserData(user: any, token: string) {
-    this.__storageService.setItem(StorageKey.TOKEN, token);
+  storeUserData(user: any, token?: string) {
     this.__storageService.setItem(StorageKey.USER, JSON.stringify(user));
     this.__storageService.setItem(StorageKey.PERMISSIONS, JSON.stringify(user.permissions));
     this.permissions = user.permissions;
     this.user = user;
-    this.authToken = token;
+    if(token){
+      this.__storageService.setItem(StorageKey.TOKEN, token);
+      this.authToken = token;
+    }
     this.setviewType('sidebar');
     return { user: user, roles: user.roles, id: user.id };
   }
