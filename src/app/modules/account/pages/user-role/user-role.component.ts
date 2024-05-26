@@ -74,7 +74,7 @@ export class UserRoleComponent extends TablePageSharedComponent implements OnIni
     super.onResume(result);
     if (this.__pageConfig?.page_id === result?.data?.parent_id) {
       switch (result?.data?.id) {
-        case Page.ADD_USER:
+        case Page.UPDATE_USER_ROLE:
           if (result?.data?.action === 'ok') {
             this.getTableData();
           }

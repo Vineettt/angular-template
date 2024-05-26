@@ -1,4 +1,15 @@
 app-modify-role-route-mapping{
+    .container {
+        max-width: 30rem;
+        mat-dialog-content{
+            mat-selection-list {
+                max-height: 20rem!important;
+                min-height: 20rem!important;
+                max-width: 20rem!important;
+                min-width: 20rem!important;
+            }
+        }
+    }
     .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
         height: 0;
     }

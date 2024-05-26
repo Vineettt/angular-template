@@ -28,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { TablePageSharedComponent } from './pages/table-page-shared/table-page-shared.component';
 import { SelectComponent } from './elements/select/select.component';
 import { ListComponent } from './elements/list/list.component';
+import { BaseModalComponent } from './elements/base-modal/base-modal.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ListComponent } from './elements/list/list.component';
     TableComponent,
     TablePageSharedComponent,
     SelectComponent,
-    ListComponent
+    ListComponent,
+    BaseModalComponent
   ],
   imports: [
     CommonModule,
@@ -96,7 +98,8 @@ import { ListComponent } from './elements/list/list.component';
     TableComponent,
     SelectComponent,
     MatListModule,
-    ListComponent
+    ListComponent,
+    BaseModalComponent
   ],
 })
 export class SharedModule {}

@@ -1,4 +1,8 @@
-<mat-label>{{__label}}</mat-label>
+<mat-label *ngIf="!__search">{{__label}}</mat-label>
+<mat-form-field  *ngIf="__search" [appearance]="__appearance">
+    <mat-label>{{__label}}</mat-label>
+	<input matInput [(ngModel)]="__searchText" autocomplete="off" (ngModelChange)="onSearchText($event)">
+</mat-form-field>
 <mat-selection-list #items [(ngModel)]="__value" (ngModelChange)="onValueChange($event)" [multiple]="__multiple">
     @for (item of __itemsList; track item) {
         <mat-list-option [selected]="__value.includes(item[__bindValue])" [value]="item[__bindValue]">{{item[__bindLabel]}}</mat-list-option>

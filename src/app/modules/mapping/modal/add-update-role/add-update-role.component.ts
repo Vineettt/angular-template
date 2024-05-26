@@ -1,12 +1,11 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BaseElementPayload } from 'src/app/shared/elements/base-element/base-element';
-import { BasePageComponent, SnackBarPayload } from 'src/app/shared/elements/base-page/base-page.component';
+import { BaseModalComponent } from 'src/app/shared/elements/base-modal/base-modal.component';
+import { SnackBarPayload } from 'src/app/shared/elements/base-page/base-page.component';
 import { DialogModel } from 'src/app/shared/services/dialog/dialog.service';
 import { PROMPTS } from 'src/assets/const/prompts';
 import { TITLELIST } from 'src/assets/const/title-list';
-import { ButtonType } from 'src/assets/enums/button';
-import { Color } from 'src/assets/enums/color';
 import { Page } from 'src/assets/enums/page';
 
 @Component({
@@ -16,7 +15,7 @@ import { Page } from 'src/assets/enums/page';
   encapsulation: ViewEncapsulation.None,
 })
 export class AddUpdateRoleComponent
-  extends BasePageComponent
+  extends BaseModalComponent
   implements OnInit
 {
   __roleInput: any = {
@@ -28,28 +27,11 @@ export class AddUpdateRoleComponent
     value: '',
   };
 
-  __okButton: any = {
-    id: 'ok',
-    element: 'button',
-    type: ButtonType.flat,
-    label: 'OK',
-    color: Color.primary,
-  };
-
-  __cancelButton: any = {
-    id: 'cancel',
-    element: 'button',
-    type: ButtonType.flat,
-    label: 'Cancel',
-  };
-
-  __title!: string;
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogModel,
-    private __dialogRef: MatDialogRef<AddUpdateRoleComponent>
+    public __dialogRef: MatDialogRef<AddUpdateRoleComponent>
   ) {
-    super();
+    super(data, __dialogRef);
   }
 
   ngOnInit(): void {
@@ -100,22 +82,5 @@ export class AddUpdateRoleComponent
     if (event.id === 'role') {
       this.__roleInput.value = event.value;
     }
-  }
-
-  closeModel(action?: string, payload?: any) {
-    let dModel = new DialogModel();
-    dModel.id = this.__pageConfig?.page_id;
-    dModel.parent_id = this.data.id;
-    dModel.parent_data = this.data;
-    dModel.action = action;
-    dModel.payload = payload;
-
-    this.__dialogService.closeDialog(
-      {
-        data: dModel,
-      },
-      false,
-      this.__dialogRef
-    );
   }
 }

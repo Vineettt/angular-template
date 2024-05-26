@@ -13,7 +13,7 @@ export class BaseElementComponent implements OnInit {
 
   @Input('element') __element!:string;
 
-  @Input('value') __value!: string;
+  @Input('value') __value!: any;
 
   @Input('label') __label!: string;
 

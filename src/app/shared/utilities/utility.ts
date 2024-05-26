@@ -29,4 +29,8 @@ export class Utility {
       (leftValue: any) =>
         !right.some((rightValue: any) => compareFunction(leftValue, rightValue))
     );
+
+  static breakArrayReferance(arr: any[]){
+    return JSON.parse(JSON.stringify(arr))
+  }
 }

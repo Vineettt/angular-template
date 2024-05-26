@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UpdateRouteComponent } from 'src/app/modules/mapping/modal/update-route/update-route.component';
 import { BaseElementPayload } from 'src/app/shared/elements/base-element/base-element';
+import { BaseModalComponent } from 'src/app/shared/elements/base-modal/base-modal.component';
 import {
   BasePageComponent,
   SnackBarPayload,
@@ -15,8 +15,6 @@ import { DialogModel } from 'src/app/shared/services/dialog/dialog.service';
 import { Utility } from 'src/app/shared/utilities/utility';
 import { PROMPTS } from 'src/assets/const/prompts';
 import { TITLELIST } from 'src/assets/const/title-list';
-import { ButtonType } from 'src/assets/enums/button';
-import { Color } from 'src/assets/enums/color';
 import { Page } from 'src/assets/enums/page';
 
 @Component({
@@ -26,7 +24,7 @@ import { Page } from 'src/assets/enums/page';
   encapsulation: ViewEncapsulation.None,
 })
 export class AddUpdateUserComponent
-  extends BasePageComponent
+  extends BaseModalComponent
   implements OnInit
 {
   __statusSelect: any = {
@@ -80,32 +78,15 @@ export class AddUpdateUserComponent
     disabled: false,
   };
 
-  __okButton: any = {
-    id: 'ok',
-    element: 'button',
-    type: ButtonType.flat,
-    label: 'OK',
-    color: Color.primary,
-  };
-
-  __cancelButton: any = {
-    id: 'cancel',
-    element: 'button',
-    type: ButtonType.flat,
-    label: 'Cancel',
-  };
-
-  __title!: string;
-
   __editMode: boolean = false;
 
   __addMode: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogModel,
-    private __dialogRef: MatDialogRef<UpdateRouteComponent>
+    public __dialogRef: MatDialogRef<AddUpdateUserComponent>
   ) {
-    super();
+    super(data, __dialogRef);
   }
 
   ngOnInit(): void {
@@ -216,46 +197,12 @@ export class AddUpdateUserComponent
     }
   }
 
-  closeModel(action?: string, payload?: any) {
-    let dModel = new DialogModel();
-    dModel.id = this.__pageConfig?.page_id;
-    dModel.parent_id = this.data.id;
-    dModel.parent_data = this.data;
-    dModel.action = action;
-    dModel.payload = payload;
-
-    this.__dialogService.closeDialog(
-      {
-        data: dModel,
-      },
-      false,
-      this.__dialogRef
-    );
-  }
-
   iconClick(event: BaseElementPayload) {
     if (event.id === 'password') {
       this.__passwordInput.type =
         event?.type === 'password' ? 'text' : 'password';
       this.__passwordInput.icon = event?.icon === 'key' ? 'key_off' : 'key';
     }
-  }
-  triggerAction(requestPayloadObject: APIRequestPayload) {
-    let subscr = this.__apiCallService
-      .callService(requestPayloadObject)
-      .subscribe({
-        next: (res: any) => {
-          this.closeModel('ok');
-        },
-        error: async (err: any) => {
-          let rPayload = await this.initError(err, requestPayloadObject);
-          if (rPayload.status) {
-            this.triggerAction(rPayload?.aPayload);
-          }
-        },
-        complete: () => {},
-      });
-    this.__subscriptions.push(subscr);
   }
 
   isSimilar(a: any, b: any) {

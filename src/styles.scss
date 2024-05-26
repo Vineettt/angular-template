@@ -26,11 +26,13 @@ body {
         --mat-mdc-snack-bar-button-color: #fff;
         --mdc-snackbar-supporting-text-color: #fff;
     }
+
     &.red-snackbar {
         --mdc-snackbar-container-color: #cc1919;
         --mat-mdc-snack-bar-button-color: #fff;
         --mdc-snackbar-supporting-text-color: #fff;
     }
+
     &.green-snackbar {
         --mdc-snackbar-container-color: #0a8e0a;
         --mat-mdc-snack-bar-button-color: #fff;
@@ -38,9 +40,9 @@ body {
     }
 }
 
-h1{
+h1 {
     padding: 0;
-    margin: 0!important;
+    margin: 0 !important;
 }
 
 .row-height {

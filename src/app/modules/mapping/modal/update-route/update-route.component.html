@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <div mat-dialog-title [innerHtml]="__title"></div>
     <mat-dialog-content class="pt-20">
         <app-select [id]="__handlerSelect.id" [element]="__handlerSelect.element" [item-list]="__handlerSelect.itemList" [label]="__handlerSelect.label" [value]="__handlerSelect.value" (valueChanged)="valueChanged($event)"></app-select>

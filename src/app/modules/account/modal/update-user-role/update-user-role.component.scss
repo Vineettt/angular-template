@@ -1,5 +1,14 @@
 app-update-user-role{
+    .container {
+        max-width: 30rem;
+    }
     .mat-mdc-form-field-subscript-wrapper.mat-mdc-form-field-bottom-align {
         height: 0;
+    }
+
+    app-select {
+        mat-form-field {
+            width: 100%;
+        }
     }
 }

@@ -14,5 +14,5 @@ export const TITLELIST: any = {
   ADD_USER: 'Add User',
   UPDATE_USER: 'Update User',
   USER_ROLE: 'User Role Mapping',
-  UPDATE_USER_ROLE: 'Update User Role',
+  UPDATE_USER_ROLE: 'Update User Role Mapping',
 };

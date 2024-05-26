@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BaseElementPayload } from 'src/app/shared/elements/base-element/base-element';
+import { BaseModalComponent } from 'src/app/shared/elements/base-modal/base-modal.component';
 import {
   BasePageComponent,
   SnackBarPayload,
@@ -18,7 +19,7 @@ import { Page } from 'src/assets/enums/page';
   styleUrl: './update-route.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class UpdateRouteComponent extends BasePageComponent implements OnInit {
+export class UpdateRouteComponent extends BaseModalComponent implements OnInit {
   __handlerSelect: any = {
     id: 'handler',
     element: 'select',
@@ -28,28 +29,11 @@ export class UpdateRouteComponent extends BasePageComponent implements OnInit {
     itemList: [],
   };
 
-  __okButton: any = {
-    id: 'ok',
-    element: 'button',
-    type: ButtonType.flat,
-    label: 'OK',
-    color: Color.primary,
-  };
-
-  __cancelButton: any = {
-    id: 'cancel',
-    element: 'button',
-    type: ButtonType.flat,
-    label: 'Cancel',
-  };
-
-  __title!: string;
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogModel,
-    private __dialogRef: MatDialogRef<UpdateRouteComponent>
+    public __dialogRef: MatDialogRef<UpdateRouteComponent>
   ) {
-    super();
+    super(data, __dialogRef);
   }
 
   ngOnInit(): void {
@@ -94,22 +78,5 @@ export class UpdateRouteComponent extends BasePageComponent implements OnInit {
     if (event.id === 'handler') {
       this.__handlerSelect.value = event.value;
     }
-  }
-
-  closeModel(action?: string, payload?: any) {
-    let dModel = new DialogModel();
-    dModel.id = this.__pageConfig?.page_id;
-    dModel.parent_id = this.data.id;
-    dModel.parent_data = this.data;
-    dModel.action = action;
-    dModel.payload = payload;
-
-    this.__dialogService.closeDialog(
-      {
-        data: dModel,
-      },
-      false,
-      this.__dialogRef
-    );
   }
 }
