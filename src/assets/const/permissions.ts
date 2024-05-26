@@ -4,7 +4,7 @@ export const permissionsConfig: any = {
     method: 'post',
   },
   user_role_mapping_post: {
-    endpoint: '/user_role_mapping',
+    endpoint: '/user-role-mapping',
     method: 'post',
   },
   role_route_mappings_post:{
