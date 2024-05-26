@@ -12,10 +12,10 @@ const routes: Routes = [
       {
         path: 'main',
         component: MainComponent,
-        canActivate: [LoggedInGuard],
-        data: {
-          permissions : ["routes_post"]
-        }
+        // canActivate: [LoggedInGuard],
+        // data: {
+        //   permissions : ["routes_post"]
+        // }
       },
     ],
   },

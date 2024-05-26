@@ -16,7 +16,7 @@ const routes: Routes = [
         component: RouteRoleComponent,
         canActivate: [LoggedInGuard],
         data: {
-          permissions: ['routes_post'],
+          permissions: ['role_route_mappings_post'],
         },
       },
       {
@@ -32,7 +32,7 @@ const routes: Routes = [
         component: RoleComponent,
         canActivate: [LoggedInGuard],
         data: {
-          permissions: ['routes_post'],
+          permissions: ['roles_post'],
         },
       },
     ],

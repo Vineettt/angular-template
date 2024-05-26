@@ -3,29 +3,29 @@ export const sideBarList: any = [
     label: 'Dashboard',
     icon: 'dashboard',
     route: '/dashboard/main',
-  permissionsArray: ['routes_post'],
+    permissionsArray: [],
     expand: false,
   },
   {
     label: 'User',
     icon: 'group',
-  route: '/account/users',
-    permissionsArray: ['routes_post'],
+    route: '/account/users',
+    permissionsArray: ['users_post'],
     expand: false,
     childItems: [
       {
         label: 'UR Mapping',
         icon: 'folder_supervised',
         route: '/account/user-role',
-        permissionsArray: ['routes_post'],
-      }
+        permissionsArray: ['user_role_mapping_post'],
+      },
     ],
   },
   {
     label: 'RR Mapping',
     icon: 'join_inner',
     route: '/mapping/route-role',
-    permissionsArray: ['routes_post'],
+    permissionsArray: ['role_route_mappings_post'],
     expand: false,
     childItems: [
       {
@@ -38,7 +38,7 @@ export const sideBarList: any = [
         label: 'Role',
         icon: 'person',
         route: '/mapping/role',
-        permissionsArray: ['routes_post'],
+        permissionsArray: ['roles_post'],
       },
     ],
   },
