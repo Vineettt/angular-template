@@ -76,8 +76,8 @@ export class TablePageSharedComponent
 
     let subscr = this.__apiCallService.callService(requestPayloadObject).subscribe({
       next: (res: any) => {
-        this.__table.dataSource = res?.payload;
-        this.__table.length = res?.length;
+        this.__table.dataSource = res?.payload || [];
+        this.__table.length = res?.length || 0;
         this.__cDRefs.detectChanges();
       },
       error: async (err: any) => {

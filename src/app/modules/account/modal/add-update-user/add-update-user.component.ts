@@ -92,7 +92,7 @@ export class AddUpdateUserComponent
   ngOnInit(): void {
     super.ngOnInit();
     this.initPageConfig(this.data?.componentData?.init_page);
-    this.__title = TITLELIST[this.__pageConfig.title];
+    this.__title = TITLELIST[this.__pageConfig?.title];
     if (this.data?.componentData?.list) {
       this.__statusSelect.itemList = this.data?.componentData?.list;
     }
@@ -129,7 +129,7 @@ export class AddUpdateUserComponent
           first_name: this.__firstNameInput.value,
           last_name: this.__lastNameInput.value,
         };
-        if (Utility.validateObjectEmpty(payload)) {
+        if (Utility.validateObjectEmpty(payload, ['email', 'password', 'first_name', 'last_name'])) {
           snackBarPayload.message = PROMPTS['FIELDS_REQUIRED'];
           this.triggerSnackBar(snackBarPayload);
           return;
@@ -150,7 +150,7 @@ export class AddUpdateUserComponent
             status: this.__statusSelect.value,
           },
         ];
-        if (await Utility.validateArrayEmpty(payload)) {
+        if (await Utility.validateArrayEmpty(payload, ['id', 'email', 'first_name', 'last_name', 'status'])) {
           snackBarPayload.message = PROMPTS['FIELDS_REQUIRED'];
           this.triggerSnackBar(snackBarPayload);
           return;

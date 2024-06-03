@@ -29,7 +29,12 @@ import { TablePageSharedComponent } from './pages/table-page-shared/table-page-s
 import { SelectComponent } from './elements/select/select.component';
 import { ListComponent } from './elements/list/list.component';
 import { BaseModalComponent } from './elements/base-modal/base-modal.component';
-
+import { TextareaComponent } from './elements/textarea/textarea.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MonthlyDatepickerComponent } from './elements/monthly-datepicker/monthly-datepicker.component';
+import { CardComponent } from './elements/card/card.component';
+import { ChartComponent } from './elements/chart/chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,11 @@ import { BaseModalComponent } from './elements/base-modal/base-modal.component';
     TablePageSharedComponent,
     SelectComponent,
     ListComponent,
-    BaseModalComponent
+    BaseModalComponent,
+    TextareaComponent,
+    MonthlyDatepickerComponent,
+    CardComponent,
+    ChartComponent
   ],
   imports: [
     CommonModule,
@@ -68,6 +77,8 @@ import { BaseModalComponent } from './elements/base-modal/base-modal.component';
     MatInputModule,
     MatMenuModule,
     MatSortModule,
+    MatDatepickerModule,
+    NgxChartsModule
   ],
   exports: [
     CommonModule,
@@ -99,7 +110,13 @@ import { BaseModalComponent } from './elements/base-modal/base-modal.component';
     SelectComponent,
     MatListModule,
     ListComponent,
-    BaseModalComponent
+    BaseModalComponent,
+    TextareaComponent,
+    MatDatepickerModule,
+    MonthlyDatepickerComponent,
+    CardComponent,
+    ChartComponent,
+    NgxChartsModule
   ],
 })
 export class SharedModule {}

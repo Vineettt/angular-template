@@ -1,18 +1,18 @@
 export class Utility {
-  static validateObjectEmpty(obj: any) {
+  static validateObjectEmpty(obj: any, keysArray: string[]) {
     let flag = false;
     for (const key in obj) {
-      if (obj[key]?.length === 0) {
+      if (obj[key]?.length === 0 && keysArray.includes(key)) {
         flag = true;
       }
     }
     return flag;
   }
 
-  static async validateArrayEmpty(arr: any){
+  static async validateArrayEmpty(arr: any, keysArray: string[]){
     let flag = false;
     for (const itr of arr) {
-        let res = await this.validateObjectEmpty(itr);
+        let res = await this.validateObjectEmpty(itr, keysArray);
         if(res){
             flag = true;
         }

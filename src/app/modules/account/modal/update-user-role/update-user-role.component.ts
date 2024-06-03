@@ -39,7 +39,7 @@ export class UpdateUserRoleComponent extends BaseModalComponent implements OnIni
   ngOnInit(): void {
     super.ngOnInit();
     this.initPageConfig(this.data?.componentData?.init_page);
-    this.__title = TITLELIST[this.__pageConfig.title];
+    this.__title = TITLELIST[this.__pageConfig?.title];
     if (this.data?.componentData?.list) {
       this.__roleSelect.itemList = this.data?.componentData?.list;
     }

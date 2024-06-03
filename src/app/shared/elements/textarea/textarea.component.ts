@@ -1,32 +1,14 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
-import { BaseElementComponent } from '../base-element/base-element.component';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { BaseElementPayload } from '../base-element/base-element';
+import { BaseElementComponent } from '../base-element/base-element.component';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrl: './input.component.scss',
+  selector: 'app-textarea',
+  templateUrl: './textarea.component.html',
+  styleUrl: './textarea.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class InputComponent extends BaseElementComponent implements OnInit {
-
-  @Input('min') __min!:string
-
-  @Input('max') __max!:string
-
-  @Input('pattern') __pattern!:string
-
-  @Input('maxlength') __maxlength!:string
-
-  @Input('minlength') __minlength!:string
-
+export class TextareaComponent extends BaseElementComponent implements OnInit {
   @Output() valueChanged = new EventEmitter();
 
   @Output() onIconClick = new EventEmitter();

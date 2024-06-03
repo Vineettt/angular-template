@@ -28,5 +28,8 @@ export class APIRequestPayload{
     USER = "user",
     USERS = "users",
     USER_STATUS = "user-status",
-    USER_ROLE_MAPPING = "user-role-mapping"
+    USER_ROLE_MAPPING = "user-role-mapping",
+    DONATIONS = "donations",
+    DONATION = "donation",
+    DASHBOARD ="dashboard"
   }

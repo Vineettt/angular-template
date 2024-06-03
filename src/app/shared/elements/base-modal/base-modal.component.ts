@@ -4,7 +4,7 @@ import { ButtonType } from 'src/assets/enums/button';
 import { Color } from 'src/assets/enums/color';
 import { DialogModel } from '../../services/dialog/dialog.service';
 import { BaseElementPayload } from '../base-element/base-element';
-import { BasePageComponent } from '../base-page/base-page.component';
+import { BasePageComponent, SnackBarPayload } from '../base-page/base-page.component';
 import { APIRequestPayload } from '../../services/api-call/api-call';
 
 @Component({
@@ -69,6 +69,9 @@ export class BaseModalComponent extends BasePageComponent implements OnInit {
       .callService(requestPayloadObject)
       .subscribe({
         next: (res: any) => {
+          let snackBarPayload = new SnackBarPayload();
+          snackBarPayload.message = res.message;
+          this.triggerSnackBar(snackBarPayload);
           this.closeModel('ok');
         },
         error: async (err: any) => {

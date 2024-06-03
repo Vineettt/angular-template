@@ -22,7 +22,7 @@ export class UserRoleComponent extends TablePageSharedComponent implements OnIni
   ngOnInit(): void {
     super.ngOnInit();
     this.initPageConfig(Page.USER_ROLE);
-    this.__title = TITLELIST[this.__pageConfig.title];
+    this.__title = TITLELIST[this.__pageConfig?.title];
     this.__table.displayedColumns = ['email', 'roles', 'edit'];
     this.__table.columnData = [
       { prop: 'email', displayName: 'Email' },

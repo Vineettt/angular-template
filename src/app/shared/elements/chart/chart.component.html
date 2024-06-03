@@ -1,0 +1,7 @@
+<ng-container [ngSwitch]="__type">
+    <ngx-charts-line-chart *ngSwitchCase="'line-chart'" [view]="__view" [scheme]="__colorScheme" [legend]="__legend"
+        [showXAxisLabel]="__showXAxisLabel" [showYAxisLabel]="__showYAxisLabel" [xAxis]="__xAxis" [yAxis]="__yAxis"
+        [xAxisLabel]="__xAxisLabel" [yAxisLabel]="__yAxisLabel" [timeline]="__timeline" [results]="__dataSource">
+    </ngx-charts-line-chart>
+    <div *ngSwitchDefault>Not Loaded... (Type missing)</div>
+</ng-container>
