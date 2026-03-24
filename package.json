@@ -1,6 +1,7 @@
 {
   "name": "angular-boilerplate",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A comprehensive Angular 17 boilerplate project with Material Design, authentication, and modular architecture",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
