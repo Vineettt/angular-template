@@ -6,7 +6,6 @@ import { AppInjector } from 'src/app/app.module';
 import { ApiCallService } from '../api-call/api-call.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { APIRequestPayload, HttpMethod, Endpoint } from '../api-call/api-call';
 
 @Injectable({
   providedIn: 'root',

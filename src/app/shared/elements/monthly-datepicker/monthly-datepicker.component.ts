@@ -1,42 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker';
-import * as _moment from 'moment';
-import {default as _rollupMoment, Moment} from 'moment';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {format, startOfMonth, endOfMonth} from 'date-fns';
 import { BaseElementComponent } from '../base-element/base-element.component';
 import { BaseElementPayload } from '../base-element/base-element';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'MM-YYYY',
-  },
-  display: {
-    dateInput: 'MM-YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-
-const moment = _rollupMoment || _moment;
 @Component({
   selector: 'app-monthly-datepicker',
   templateUrl: './monthly-datepicker.component.html',
   styleUrl: './monthly-datepicker.component.scss',
-  providers: [
-    provideMomentDateAdapter(MY_FORMATS),
-  ],
   encapsulation: ViewEncapsulation.None,
-
 })
 export class MonthlyDatepickerComponent extends BaseElementComponent implements OnInit {
 
-  @Input('date') __date: any = new FormControl(moment());
+  @Input('date') __date: any = new FormControl(new Date());
 
-  @Input('format') __format: string = 'YYYY-MM-DD';
+  @Input('format') __format: string = 'yyyy-MM-dd';
 
   @Output() onMonthlyDateChanged = new EventEmitter();
 
@@ -45,21 +24,21 @@ export class MonthlyDatepickerComponent extends BaseElementComponent implements 
   }
   ngOnInit(): void {
     super.ngOnInit();
-    this.getFirstAndLastDate(this.__date.value._d);
+    this.getFirstAndLastDate(this.__date.value);
   }
 
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrlValue = this.__date.value ?? moment();
-    ctrlValue.month(normalizedMonthAndYear.month());
-    ctrlValue.year(normalizedMonthAndYear.year());
+  setMonthAndYear(normalizedMonthAndYear: Date, datepicker: MatDatepicker<Date>) {
+    const ctrlValue = this.__date.value ?? new Date();
+    ctrlValue.setMonth(normalizedMonthAndYear.getMonth());
+    ctrlValue.setFullYear(normalizedMonthAndYear.getFullYear());
     this.__date.setValue(ctrlValue);
     datepicker.close();
-    this.getFirstAndLastDate(this.__date.value._d);
+    this.getFirstAndLastDate(this.__date.value);
   }
 
-  getFirstAndLastDate(data: any){
-    const startOfMonthChangeFormat = moment(data).clone().startOf('month').format(this.__format);
-    const endOfMonthChangeFormat   = moment(data).clone().endOf('month').format(this.__format);
+  getFirstAndLastDate(data: Date){
+    const startOfMonthChangeFormat = format(startOfMonth(data), this.__format);
+    const endOfMonthChangeFormat   = format(endOfMonth(data), this.__format);
 
     let bEPayload = new BaseElementPayload();
     bEPayload.id = this.__id;
